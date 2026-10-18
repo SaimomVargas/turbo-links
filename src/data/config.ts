@@ -28,8 +28,13 @@ export interface Group {
 
 export const brand = {
   name: "Turbo Ofertas",
-  slogan: "Mais ofertas, menos preço!",
-  description: "Promoções, cupons e achadinhos para economizar de verdade.",
+  slogan: "Bugs de preço e achadinhos da Shopee",
+  description: "Nossa IA monitora a Shopee 24h por dia para encontrar erros de preço e descontos absurdos antes que todo mundo veja.",
+  highlights: [
+    { icon: "🤖", title: "IA caçadora de ofertas", desc: "Monitoramento em tempo real" },
+    { icon: "⚡", title: "Alerta rápido", desc: "Receba a oferta antes de esgotar" },
+    { icon: "🎯", title: "Direto ao ponto", desc: "Sem spam, só o que realmente vale a pena" },
+  ],
   logo: "/logo.svg",
 };
 
