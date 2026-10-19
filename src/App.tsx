@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/react";
 import { groups } from "./data/config";
 import { Profile } from "./components/Profile";
 import { GroupButton } from "./components/GroupButton";
@@ -15,6 +16,7 @@ export default function App() {
         ))}
       </nav>
       <Footer />
+      <Analytics />
     </main>
   );
 }
