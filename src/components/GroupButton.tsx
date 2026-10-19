@@ -1,9 +1,30 @@
 import type { Group } from "../data/config";
 import { PlatformIcon } from "./Icons";
 
+declare global {
+  interface Window {
+    fbq?: (...args: unknown[]) => void;
+  }
+}
+
 export function GroupButton({ group }: { group: Group }) {
+  const handleClick = () => {
+    if (typeof window !== "undefined" && typeof window.fbq === "function") {
+      window.fbq("track", "Schedule", {
+        content_name: group.title,
+        platform: group.platform,
+      });
+    }
+  };
+
   return (
-    <a className="group-btn" href={group.url} target="_blank" rel="noopener noreferrer">
+    <a
+      className="group-btn"
+      href={group.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={handleClick}
+    >
       <span className="group-btn__shimmer" aria-hidden="true" />
       <span className="group-btn__icon">
         {group.image ? (
