@@ -13,6 +13,7 @@ export function GroupButton({ group }: { group: Group }) {
       window.fbq("track", "Schedule", {
         content_name: group.title,
         platform: group.platform,
+        test_event_code: "TEST97697",
       });
     }
   };
