@@ -1,45 +1,39 @@
-import { categories, groups } from "../data/config";
-import { GroupButton } from "./GroupButton";
+import { visualCategories } from "../data/config";
 
 export function Categories() {
-  const active = groups.filter((g) => g.status === "ativo");
-
-  const withExtraGroups = categories
-    .map((c) => ({ category: c, items: active.filter((g) => g.categoryId === c.id && !g.featured) }))
-    .filter((x) => x.items.length > 0);
-
-  const comingSoon = categories.filter((c) => !active.some((g) => g.categoryId === c.id));
-
-  if (withExtraGroups.length === 0 && comingSoon.length === 0) return null;
-
   return (
-    <section className="categories" aria-labelledby="cat-title">
-      <h2 id="cat-title">Grupos por categoria</h2>
+    <section className="categories-section" aria-labelledby="cat-title">
+      <div className="section-header">
+        <span className="section-eyebrow">Garimpo Automotivo Diário</span>
+        <h3 id="cat-title" className="section-title">
+          O que você vai encontrar nos grupos
+        </h3>
+        <p className="section-subtitle">
+          Nossa IA varre a Shopee 24h para encontrar descontos agressivos nestas categorias:
+        </p>
+      </div>
 
-      {withExtraGroups.map(({ category, items }) => (
-        <div key={category.id} className="categories__block">
-          <h3>{category.name}</h3>
-          <div className="stack">
-            {items.map((g) => (
-              <GroupButton key={g.url} group={g} />
-            ))}
-          </div>
-        </div>
-      ))}
-
-      {comingSoon.length > 0 && (
-        <ul className="soon">
-          {comingSoon.map((c) => (
-            <li key={c.id} className="soon__item">
-              <span>
-                <strong>{c.name}</strong>
-                <span>{c.description}</span>
+      <div className="categories-grid">
+        {visualCategories.map((cat) => (
+          <article key={cat.id} className="cat-card">
+            <div className="cat-card__header">
+              <span className="cat-card__icon" aria-hidden="true">
+                {cat.icon}
               </span>
-              <em>Em breve</em>
-            </li>
-          ))}
-        </ul>
-      )}
+              <span className="cat-card__tag">{cat.tag}</span>
+            </div>
+            <h4 className="cat-card__title">{cat.name}</h4>
+            <p className="cat-card__desc">{cat.description}</p>
+            <div className="cat-card__examples" aria-label="Exemplos de produtos">
+              {cat.examples.map((ex, idx) => (
+                <span key={idx} className="cat-card__chip">
+                  {ex}
+                </span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }

@@ -7,7 +7,12 @@ declare global {
   }
 }
 
-export function GroupButton({ group }: { group: Group }) {
+interface GroupButtonProps {
+  group: Group;
+  labelPrefix?: string;
+}
+
+export function GroupButton({ group }: GroupButtonProps) {
   const handleClick = () => {
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Schedule", {
@@ -20,7 +25,7 @@ export function GroupButton({ group }: { group: Group }) {
 
   return (
     <a
-      className="group-btn"
+      className={`group-btn group-btn--${group.platform}`}
       href={group.url}
       target="_blank"
       rel="noopener noreferrer"
@@ -29,17 +34,29 @@ export function GroupButton({ group }: { group: Group }) {
       <span className="group-btn__shimmer" aria-hidden="true" />
       <span className="group-btn__icon">
         {group.image ? (
-          <img src={group.image} alt="" width={26} height={26} loading="lazy" />
+          <img src={group.image} alt="" width={28} height={28} loading="lazy" />
         ) : (
           <PlatformIcon platform={group.platform} />
         )}
       </span>
       <span className="group-btn__text">
-        <strong>{group.title}</strong>
-        <span>{group.description}</span>
+        <span className="group-btn__title-row">
+          <strong>{group.title}</strong>
+          {group.badge && <span className="group-btn__badge">{group.badge}</span>}
+        </span>
+        <span className="group-btn__desc">{group.description}</span>
       </span>
       <span className="group-btn__action" aria-hidden="true">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <polyline points="9 18 15 12 9 6" />
         </svg>
       </span>
