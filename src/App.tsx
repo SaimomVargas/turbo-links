@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { groups } from "./data/config";
 import { Profile } from "./components/Profile";
 import { GroupButton } from "./components/GroupButton";
+import { BotShowcase } from "./components/BotShowcase";
 import { Categories } from "./components/Categories";
 import { Highlights } from "./components/Highlights";
 import { Footer } from "./components/Footer";
@@ -27,11 +28,15 @@ export default function App() {
         </nav>
       </section>
 
-      {/* 3. Seção Visual de Categorias Automotivas */}
+      {/* 3. Destaque: Bot Ofertas Todo Dia (Vídeo Institucional e Demonstração) */}
+      <BotShowcase />
+
+      {/* 4. Seção Visual de Categorias Automotivas */}
       <Categories />
 
-      {/* 4. Prova de Confiança e Diferenciais da IA */}
+      {/* 5. Prova de Confiança e Diferenciais da IA */}
       <Highlights />
+
 
       {/* 5. Repetição Estratégica dos CTAs no Final da Página */}
       <section className="bottom-cta" aria-labelledby="cta-bottom-title">

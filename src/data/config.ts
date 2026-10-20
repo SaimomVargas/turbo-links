@@ -94,6 +94,41 @@ export const visualCategories: VisualCategory[] = [
   },
 ];
 
+export const botInfo = {
+  name: "Ofertas Todo Dia",
+  handle: "@ofertas_toda_hora_bot",
+  url: "https://t.me/ofertas_toda_hora_bot",
+  tagline: "Comparador de Preços com Inteligência Artificial",
+  badge: "Novo • Gratuito no Telegram",
+  description:
+    "Você manda o link de qualquer produto que quer comprar. Nossa Inteligência Artificial analisa o produto, varre a internet procurando o mesmo item mais barato e te devolve o link com o menor preço direto na conversa!",
+  steps: [
+    {
+      num: "1",
+      title: "Copie o link do produto",
+      desc: "Viu algo que quer comprar? Basta copiar o link em qualquer loja ou marketplace.",
+      icon: "🔗",
+    },
+    {
+      num: "2",
+      title: "Envie para o bot no Telegram",
+      desc: "Cole o link na conversa com a IA do @ofertas_toda_hora_bot. Ele analisa em segundos.",
+      icon: "💬",
+    },
+    {
+      num: "3",
+      title: "Receba o link mais barato",
+      desc: "O bot encontra o mesmo produto por um preço menor e te envia o link direto com a economia.",
+      icon: "💰",
+    },
+  ],
+  stats: [
+    { label: "Economia", value: "Até 70% OFF" },
+    { label: "Velocidade", value: "Em segundos" },
+    { label: "Acesso", value: "100% Gratuito" },
+  ],
+};
+
 export const groups: Group[] = [
   {
     title: "Entrar no Grupo VIP do WhatsApp",
@@ -106,13 +141,24 @@ export const groups: Group[] = [
     featured: true,
   },
   {
+    title: "Chamar o Bot no Telegram",
+    description: "Envie o link do produto e a IA acha mais barato.",
+    categoryId: "automotivo",
+    platform: "telegram",
+    badge: "IA Comparadora",
+    url: "https://t.me/ofertas_toda_hora_bot",
+    status: "ativo",
+    featured: true,
+  },
+  {
     title: "Entrar no Canal do Telegram",
     description: "Histórico completo de ofertas e achadinhos.",
     categoryId: "automotivo",
     platform: "telegram",
-    badge: "Histórico Completo",
+    badge: "Canal Oficial",
     url: "https://t.me/turboofertass",
     status: "ativo",
-    featured: true,
+    featured: false,
   },
 ];
+
