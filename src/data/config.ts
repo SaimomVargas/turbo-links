@@ -32,7 +32,7 @@ export const brand = {
   headline: "Economize até 70% em Peças, Acessórios e Ferramentas para seu Carro",
   radar: "Radar de Ofertas Ativo • Shopee e Grandes Lojas",
   description:
-    "Nossa IA monitora a Shopee 24h por dia para encontrar erros de preço, cupons escondidos e os melhores achadinhos automotivos antes que todo mundo veja.",
+    "Grupos VIP para economizar em peças, ferramentas e estética automotiva. Quer economizar em outro item? Envie o link de qualquer produto para nossa IA no Telegram e receba o menor preço!",
   trustBadges: [
     { icon: "🛡️", text: "100% Gratuito" },
     { icon: "⚡", text: "Alertas em Tempo Real" },
@@ -97,7 +97,7 @@ export const visualCategories: VisualCategory[] = [
 export const botInfo = {
   name: "Ofertas Todo Dia",
   handle: "@ofertas_toda_hora_bot",
-  url: "https://t.me/ofertas_toda_hora_bot",
+  url: "https://t.me/ofertas_toda_hora_bot?start=site",
   tagline: "Comparador de Preços com Inteligência Artificial",
   badge: "Novo • Gratuito no Telegram",
   description:
@@ -132,7 +132,7 @@ export const botInfo = {
 export const groups: Group[] = [
   {
     title: "Entrar no Grupo VIP do WhatsApp",
-    description: "Alertas mais rápidos • Vagas abertas e gratuitas.",
+    description: "Alertas mais rápidos de peças & acessórios • Vagas abertas.",
     categoryId: "automotivo",
     platform: "whatsapp",
     badge: "Mais Recomendado",
@@ -142,11 +142,11 @@ export const groups: Group[] = [
   },
   {
     title: "Chamar o Bot no Telegram",
-    description: "Envie o link do produto e a IA acha mais barato.",
+    description: "Envie o link de qualquer produto e a IA acha mais barato.",
     categoryId: "automotivo",
     platform: "telegram",
     badge: "IA Comparadora",
-    url: "https://t.me/ofertas_toda_hora_bot",
+    url: "https://t.me/ofertas_toda_hora_bot?start=site",
     status: "ativo",
     featured: true,
   },

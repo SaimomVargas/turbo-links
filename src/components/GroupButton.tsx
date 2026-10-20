@@ -1,3 +1,4 @@
+import { track } from "@vercel/analytics";
 import type { Group } from "../data/config";
 import { PlatformIcon } from "./Icons";
 
@@ -20,6 +21,16 @@ export function GroupButton({ group }: GroupButtonProps) {
         platform: group.platform,
         test_event_code: "TEST97697",
       });
+    }
+
+    try {
+      track("cta_click", {
+        title: group.title,
+        platform: group.platform,
+        url: group.url,
+      });
+    } catch {
+      // safe fallback
     }
   };
 

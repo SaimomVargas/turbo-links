@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { track } from "@vercel/analytics";
 import { botInfo } from "../data/config";
 import { PlatformIcon } from "./Icons";
 
@@ -20,6 +21,16 @@ export function BotShowcase() {
         platform: "telegram",
         test_event_code: "TEST97697",
       });
+    }
+
+    try {
+      track("cta_click", {
+        title: "Bot Ofertas Todo Dia Telegram",
+        platform: "telegram",
+        url: botInfo.url,
+      });
+    } catch {
+      // safe fallback
     }
   };
 
