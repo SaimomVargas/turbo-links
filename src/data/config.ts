@@ -49,20 +49,20 @@ export const categories: Category[] = [
 
 export const groups: Group[] = [
   {
-    title: "Entrar no Telegram",
-    description: "Acompanhe nossas ofertas e achadinhos.",
-    categoryId: "variadas",
-    platform: "telegram",
-    url: "https://t.me/turboofertass",
-    status: "ativo",
-    featured: true,
-  },
-  {
     title: "Entrar no grupo do WhatsApp",
     description: "Receba promoções diretamente no grupo.",
     categoryId: "variadas",
     platform: "whatsapp",
     url: "https://chat.whatsapp.com/BvxUXtqwkgoEYTEKKdLG8G?s=sw&p=i&mlu=4&ilr=4",
+    status: "ativo",
+    featured: true,
+  },
+  {
+    title: "Entrar no Telegram",
+    description: "Acompanhe nossas ofertas e achadinhos.",
+    categoryId: "variadas",
+    platform: "telegram",
+    url: "https://t.me/turboofertass",
     status: "ativo",
     featured: true,
   },

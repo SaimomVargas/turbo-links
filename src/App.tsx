@@ -2,6 +2,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { groups } from "./data/config";
 import { Profile } from "./components/Profile";
 import { GroupButton } from "./components/GroupButton";
+import { Highlights } from "./components/Highlights";
 import { Footer } from "./components/Footer";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
           <GroupButton key={g.url} group={g} />
         ))}
       </nav>
+      <Highlights />
       <Footer />
       <Analytics />
     </main>

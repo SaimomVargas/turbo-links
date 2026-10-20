@@ -1,9 +1,9 @@
 :root {
-  --black: #0a0a0a;
-  --card: #1a1a1a;
-  --line: #2c2c2c;
+  --bg: #ffffff;
+  --card: #f9fafb;
+  --line: #e5e7eb;
   --white: #ffffff;
-  --muted: #a8a8a8;
+  --muted: #64748b;
   --yellow: #ffd60a;
   --yellow-deep: #b89600;
   --ink: #0a0a0a;
@@ -12,8 +12,8 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; }
 body {
-  background: var(--black);
-  color: var(--white);
+  background: var(--bg);
+  color: var(--ink);
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -31,7 +31,7 @@ body {
 .profile__logo {
   width: 112px; height: 112px; border-radius: 50%;
   display: block; margin: 0 auto 18px;
-  box-shadow: 0 0 0 6px var(--black), 0 0 0 8px var(--yellow);
+  box-shadow: 0 0 0 6px var(--bg), 0 0 0 8px var(--yellow);
 }
 .profile__name { margin: 0; font-size: 2rem; font-weight: 900; letter-spacing: -0.02em; }
 .profile__slogan {
@@ -51,7 +51,7 @@ body {
 .profile__highlights {
   list-style: none;
   padding: 0;
-  margin: 20px 0 0;
+  margin: 32px 0 0;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -65,6 +65,7 @@ body {
   border: 1px solid var(--line);
   padding: 10px 14px;
   border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .highlight__icon {
   font-size: 1.35rem;
@@ -78,7 +79,7 @@ body {
 }
 .highlight__text strong {
   font-size: .9rem;
-  color: var(--white);
+  color: var(--ink);
   font-weight: 700;
 }
 .highlight__text span {
@@ -90,11 +91,11 @@ body {
 
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 5px 0 var(--yellow-deep), 0 0 16px rgba(255, 214, 10, 0.28);
+    box-shadow: 0 5px 0 var(--yellow-deep), 0 2px 14px rgba(212, 160, 0, 0.25);
     transform: translateY(0);
   }
   50% {
-    box-shadow: 0 5px 0 var(--yellow-deep), 0 0 32px rgba(255, 214, 10, 0.55), 0 0 10px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 5px 0 var(--yellow-deep), 0 6px 24px rgba(212, 160, 0, 0.45);
     transform: translateY(-2px);
   }
 }
@@ -145,17 +146,17 @@ body {
 
 .group-btn:hover {
   transform: translateY(-3px) scale(1.015);
-  box-shadow: 0 8px 0 var(--yellow-deep), 0 0 40px rgba(255, 214, 10, 0.75);
+  box-shadow: 0 8px 0 var(--yellow-deep), 0 8px 30px rgba(212, 160, 0, 0.55);
 }
 
 .group-btn:active {
   transform: translateY(3px) scale(0.99);
-  box-shadow: 0 2px 0 var(--yellow-deep), 0 0 15px rgba(255, 214, 10, 0.4);
+  box-shadow: 0 2px 0 var(--yellow-deep), 0 2px 12px rgba(212, 160, 0, 0.35);
 }
 
 .group-btn:focus-visible,
 .group-btn:hover:focus-visible {
-  outline: 3px solid var(--white);
+  outline: 3px solid var(--ink);
   outline-offset: 3px;
 }
 
@@ -222,20 +223,21 @@ body {
 .categories { margin-top: 44px; }
 .categories h2 { margin: 0 0 16px; font-size: 1.1rem; font-weight: 800; }
 .categories__block { margin-bottom: 20px; }
-.categories__block h3 { margin: 0 0 10px; font-size: .95rem; color: var(--yellow); }
+.categories__block h3 { margin: 0 0 10px; font-size: .95rem; color: var(--yellow-deep); }
 
 .soon { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
 .soon__item {
   display: flex; justify-content: space-between; align-items: center; gap: 12px;
   padding: 12px 16px; background: var(--card);
   border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 .soon__item > span { display: grid; min-width: 0; }
 .soon__item strong { font-size: .95rem; }
 .soon__item span span { font-size: .82rem; color: var(--muted); }
 .soon__item em {
   flex: none; font-style: normal; font-size: .75rem; font-weight: 700;
-  color: var(--yellow); border: 1px solid var(--yellow);
+  color: var(--yellow-deep); border: 1px solid var(--yellow-deep);
   border-radius: 999px; padding: 2px 10px;
 }
 
@@ -245,7 +247,7 @@ body {
   text-align: center; color: var(--muted); font-size: .82rem;
 }
 .footer p { margin: 0 0 8px; }
-.footer__brand { color: var(--white); font-weight: 700; font-size: .9rem; }
+.footer__brand { color: var(--ink); font-weight: 700; font-size: .9rem; }
 
 @media (min-width: 640px) {
   .page { padding-top: 72px; }
