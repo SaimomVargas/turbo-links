@@ -23,18 +23,6 @@ export function Profile() {
       </div>
 
       <h2 className="profile__headline">{brand.headline}</h2>
-      <p className="profile__desc">{brand.description}</p>
-
-      <div className="trust-pills" aria-label="Garantias dos grupos">
-        {brand.trustBadges.map((badge, idx) => (
-          <span key={idx} className="trust-pill">
-            <span className="trust-pill__icon" aria-hidden="true">
-              {badge.icon}
-            </span>
-            <span className="trust-pill__text">{badge.text}</span>
-          </span>
-        ))}
-      </div>
     </header>
   );
 }

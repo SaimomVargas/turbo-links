@@ -1,5 +1,5 @@
 import { Analytics } from "@vercel/analytics/react";
-import { groups } from "./data/config";
+import { brand, groups } from "./data/config";
 import { Profile } from "./components/Profile";
 import { GroupButton } from "./components/GroupButton";
 import { BotShowcase } from "./components/BotShowcase";
@@ -12,10 +12,10 @@ export default function App() {
 
   return (
     <main className="page">
-      {/* 1. Hero Automotivo: Radar, Identidade, Headline e Badges */}
+      {/* 1. Hero Automotivo: Radar, Identidade e Headline */}
       <Profile />
 
-      {/* 2. CTAs Principais Logo Após a Apresentação */}
+      {/* 2. CTAs Principais Logo Após a Headline */}
       <section className="cta-block" aria-label="Grupos principais">
         <div className="cta-block__header">
           <span className="cta-block__pulse" aria-hidden="true" />
@@ -26,6 +26,21 @@ export default function App() {
             <GroupButton key={g.url} group={g} />
           ))}
         </nav>
+      </section>
+
+      {/* 3. Prova de Confiança e Descrição Complementar */}
+      <section className="hero-reassurance" aria-label="Garantias dos grupos">
+        <div className="trust-pills">
+          {brand.trustBadges.map((badge, idx) => (
+            <span key={idx} className="trust-pill">
+              <span className="trust-pill__icon" aria-hidden="true">
+                {badge.icon}
+              </span>
+              <span className="trust-pill__text">{badge.text}</span>
+            </span>
+          ))}
+        </div>
+        <p className="profile__desc">{brand.description}</p>
       </section>
 
       {/* 3. Destaque: Bot Ofertas Todo Dia (Vídeo Institucional e Demonstração) */}
