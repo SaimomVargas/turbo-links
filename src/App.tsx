@@ -12,7 +12,7 @@ export default function App() {
 
   return (
     <main className="page">
-      {/* 1. Hero Automotivo: Radar, Identidade e Headline */}
+      {/* 1. Hero Automotivo: Identidade e Headline */}
       <Profile />
 
       {/* 2. CTAs Principais Logo Após a Headline */}

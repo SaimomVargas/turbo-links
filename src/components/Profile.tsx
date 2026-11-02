@@ -3,11 +3,6 @@ import { brand } from "../data/config";
 export function Profile() {
   return (
     <header className="profile">
-      <div className="radar-badge" role="status">
-        <span className="radar-badge__dot" aria-hidden="true" />
-        <span>{brand.radar}</span>
-      </div>
-
       <div className="profile__header">
         <img
           className="profile__logo"
