@@ -257,96 +257,6 @@ body {
   object-fit: cover;
 }
 
-.proof-placeholder {
-  padding: 14px;
-  background: #f8fafc;
-}
-
-.proof-msg-bubble {
-  background: #e7f8eb;
-  border: 1px solid #c2eecf;
-  border-radius: 14px;
-  border-top-left-radius: 4px;
-  padding: 14px 16px;
-  text-align: left;
-}
-
-.proof-msg-tag {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: #166534;
-  margin-bottom: 6px;
-}
-
-.proof-msg-time {
-  font-size: 0.68rem;
-  color: #475569;
-  font-weight: 600;
-}
-
-.proof-msg-title {
-  font-size: 0.95rem;
-  font-weight: 850;
-  color: #0f172a;
-  display: block;
-  margin-bottom: 8px;
-  line-height: 1.35;
-}
-
-.proof-msg-price-row {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-}
-
-.proof-msg-old {
-  font-size: 0.85rem;
-  color: #94a3b8;
-  text-decoration: line-through;
-  font-weight: 600;
-}
-
-.proof-msg-new {
-  font-size: 1.35rem;
-  font-weight: 900;
-  color: #166534;
-}
-
-.proof-msg-badge {
-  font-size: 0.68rem;
-  font-weight: 800;
-  background: var(--yellow);
-  color: #0f172a;
-  padding: 2px 7px;
-  border-radius: 4px;
-}
-
-.proof-msg-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.74rem;
-  color: #475569;
-  font-weight: 600;
-  border-top: 1px dashed #bbf7d0;
-  padding-top: 8px;
-  margin-top: 4px;
-}
-
-.proof-placeholder-hint {
-  padding: 8px 10px;
-  font-size: 0.72rem;
-  color: #64748b;
-  font-weight: 600;
-  text-align: center;
-  border-top: 1px solid var(--line);
-  background: #ffffff;
-}
-
 /* -------------------------------------------------------------
    3. Categorias em Linha de Chips Curtos
    ------------------------------------------------------------- */
@@ -513,6 +423,17 @@ body {
   display: none;
 }
 
+@keyframes sticky-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 @media (max-width: 639px) {
   .page {
     padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
@@ -531,6 +452,7 @@ body {
     -webkit-backdrop-filter: blur(12px);
     border-top: 1px solid var(--line);
     box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+    animation: sticky-in 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .sticky-cta__btn {

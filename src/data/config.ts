@@ -1,21 +1,16 @@
 /**
  * Configuração central do turbo-links: rotas de redirecionamento,
  * variantes A/B, categorias e dados do grupo.
+ * 
+ * NOTA: Os links reais de destino ficam exclusivamente no vercel.json.
  */
 
 export type Platform = "whatsapp" | "telegram";
-export type Status = "ativo" | "em-breve";
 
 export const redirects = {
   whatsapp: "/go/whatsapp",
   telegram: "/go/telegram",
   bot: "/go/bot",
-};
-
-export const externalUrls = {
-  whatsapp: "https://chat.whatsapp.com/BvxUXtqwkgoEYTEKKdLG8G?s=sw&p=i&mlu=4&ilr=4",
-  telegram: "https://t.me/turboofertass",
-  bot: "https://t.me/ofertas_toda_hora_bot?start=site",
 };
 
 export interface ABVariant {
@@ -53,25 +48,10 @@ export const brand = {
   trustBadges: [
     { icon: "🛡️", text: "100% Gratuito" },
     { icon: "🚫", text: "Zero Spam" },
+    // TODO (Confirmação necessária): Confirme se "Links Verificados" e "Alertas Diários"
+    // são de fato verdadeiros para o seu grupo antes de manter ativos em produção.
     { icon: "🔒", text: "Links Verificados" },
     { icon: "⚡", text: "Alertas Diários" },
-  ],
-  highlights: [
-    {
-      icon: "🔍",
-      title: "Monitoramento de Ofertas e Cupons",
-      desc: "Rastreamos promoções, cupons relâmpago e oportunidades reais na Shopee e grandes lojas.",
-    },
-    {
-      icon: "⚡",
-      title: "Notificação Imediata no Bolso",
-      desc: "Receba o alerta direto no WhatsApp ou Telegram sem perder tempo.",
-    },
-    {
-      icon: "🎯",
-      title: "Foco 100% no seu Carro & Moto",
-      desc: "Curadoria especializada em estética, ferramentas e manutenção que realmente valem a pena.",
-    },
   ],
 };
 
@@ -96,56 +76,3 @@ export const categoryChips: CategoryChip[] = [
   { id: "ferramentas", icon: "🔧", name: "Ferramentas & Oficina" },
   { id: "manutencao", icon: "🏁", name: "Peças & Manutenção" },
 ];
-
-export interface Group {
-  title: string;
-  description: string;
-  categoryId: string;
-  platform: Platform;
-  url: string;
-  status: Status;
-  badge?: string;
-  featured?: boolean;
-  image?: string;
-}
-
-export const groups: Group[] = [
-  {
-    title: "Entrar no Grupo VIP do WhatsApp",
-    description: "Grátis, sem spam. Você pode sair quando quiser.",
-    categoryId: "automotivo",
-    platform: "whatsapp",
-    badge: "Mais Recomendado",
-    url: redirects.whatsapp,
-    status: "ativo",
-    featured: true,
-  },
-  {
-    title: "Entrar no Canal do Telegram",
-    description: "Histórico de ofertas e achadinhos.",
-    categoryId: "automotivo",
-    platform: "telegram",
-    badge: "Canal Oficial",
-    url: redirects.telegram,
-    status: "ativo",
-    featured: false,
-  },
-];
-
-export const botInfo = {
-  name: "Ofertas Todo Dia",
-  handle: "@ofertas_toda_hora_bot",
-  url: redirects.bot,
-  badge: "Gratuito no Telegram",
-  description: "Envie o link de qualquer produto e encontre o menor preço.",
-  steps: [
-    { num: "1", title: "Copie o link", desc: "Copie o link do produto", icon: "🔗" },
-    { num: "2", title: "Envie no Telegram", desc: "Cole na conversa com o bot", icon: "💬" },
-    { num: "3", title: "Receba o menor preço", desc: "Link direto com a economia", icon: "💰" },
-  ],
-  stats: [
-    { label: "Economia", value: "Menor Preço" },
-    { label: "Velocidade", value: "Em segundos" },
-    { label: "Acesso", value: "100% Gratuito" },
-  ],
-};

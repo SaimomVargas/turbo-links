@@ -1,13 +1,29 @@
-import { redirects } from "../data/config";
+import { getVariant, redirects } from "../data/config";
 import { track } from "@vercel/analytics";
 
-export function Footer() {
+interface FooterProps {
+  variant?: string;
+}
+
+export function Footer({ variant: propVariant }: FooterProps) {
+  const variant = propVariant || getVariant();
+
   const handleBotClick = () => {
+    if (typeof window !== "undefined" && typeof window.fbq === "function") {
+      window.fbq("track", "Lead", {
+        content_name: "Bot Comparador no Telegram",
+        platform: "telegram",
+        placement: "footer",
+        variant,
+      });
+    }
+
     try {
       track("cta_click", {
         title: "Bot Comparador no Telegram",
         platform: "telegram_bot",
         placement: "footer",
+        variant,
         url: redirects.bot,
       });
     } catch {

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 import { Analytics } from "@vercel/analytics/react";
 import { abVariants, brand, getVariant, redirects } from "./data/config";
@@ -10,6 +11,27 @@ import { PlatformIcon } from "./components/Icons";
 export default function App() {
   const variant = getVariant();
   const currentVariant = abVariants[variant];
+
+  const [showSticky, setShowSticky] = useState(false);
+  const heroBtnRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    const target = heroBtnRef.current;
+    if (!target || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Mostra o botão fixo no mobile apenas depois que o botão do hero sair da tela
+        setShowSticky(!entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+      }
+    );
+
+    observer.observe(target);
+    return () => observer.disconnect();
+  }, []);
 
   const handleCtaClick = (placement: "hero" | "sticky" | "final") => {
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
@@ -35,6 +57,15 @@ export default function App() {
   };
 
   const handleTelegramClick = () => {
+    if (typeof window !== "undefined" && typeof window.fbq === "function") {
+      window.fbq("track", "Lead", {
+        content_name: brand.telegramText,
+        platform: "telegram",
+        placement: "hero_secondary",
+        variant,
+      });
+    }
+
     try {
       track("cta_click", {
         title: brand.telegramText,
@@ -59,6 +90,7 @@ export default function App() {
 
         <div className="hero-cta-wrap">
           <a
+            ref={heroBtnRef}
             href={redirects.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
@@ -89,7 +121,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* 2. Prova do que a pessoa vai receber no grupo */}
+      {/* 2. Prova do que a pessoa vai receber no grupo (só renderiza se houver imagem ou dados reais) */}
       <OfferProof />
 
       {/* 3. Categorias em linha de chips curtos */}
@@ -137,28 +169,30 @@ export default function App() {
       </section>
 
       {/* 6. Rodapé com link discreto do bot e transparência */}
-      <Footer />
+      <Footer variant={variant} />
 
-      {/* 7. Botão fixo no rodapé no celular (abaixo de 640px) */}
-      <aside className="sticky-cta" aria-label="Acesso fixo ao WhatsApp">
-        <a
-          href={redirects.whatsapp}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="sticky-cta__btn"
-          onClick={() => handleCtaClick("sticky")}
-          id="btn-sticky-whatsapp"
-        >
-          <span className="sticky-cta__icon">
-            <PlatformIcon platform="whatsapp" />
-          </span>
-          <span className="sticky-cta__text">
-            <strong>{currentVariant.buttonText}</strong>
-            <small>Grátis • Sem Spam</small>
-          </span>
-          <span className="sticky-cta__arrow" aria-hidden="true">→</span>
-        </a>
-      </aside>
+      {/* 7. Botão fixo no celular (exibido apenas quando o botão do hero sair da tela via IntersectionObserver) */}
+      {showSticky && (
+        <aside className="sticky-cta" aria-label="Acesso fixo ao WhatsApp">
+          <a
+            href={redirects.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sticky-cta__btn"
+            onClick={() => handleCtaClick("sticky")}
+            id="btn-sticky-whatsapp"
+          >
+            <span className="sticky-cta__icon">
+              <PlatformIcon platform="whatsapp" />
+            </span>
+            <span className="sticky-cta__text">
+              <strong>{currentVariant.buttonText}</strong>
+              <small>Grátis • Sem Spam</small>
+            </span>
+            <span className="sticky-cta__arrow" aria-hidden="true">→</span>
+          </a>
+        </aside>
+      )}
 
       <Analytics />
     </main>
