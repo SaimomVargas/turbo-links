@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "/go/whatsapp",
+      "destination": "https://chat.whatsapp.com/BvxUXtqwkgoEYTEKKdLG8G?s=sw&p=i&mlu=4&ilr=4",
+      "permanent": false
+    },
+    {
+      "source": "/go/telegram",
+      "destination": "https://t.me/turboofertass",
+      "permanent": false
+    },
+    {
+      "source": "/go/bot",
+      "destination": "https://t.me/ofertas_toda_hora_bot?start=site",
+      "permanent": false
+    }
+  ]
+}
+

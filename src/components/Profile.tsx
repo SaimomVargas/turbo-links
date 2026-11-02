@@ -1,23 +1,26 @@
 import { brand } from "../data/config";
 
-export function Profile() {
+interface ProfileProps {
+  headline: string;
+  support: string;
+}
+
+export function Profile({ headline, support }: ProfileProps) {
   return (
     <header className="profile">
-      <div className="profile__header">
+      <div className="brand-header">
         <img
-          className="profile__logo"
+          className="brand-logo"
           src={brand.logo}
           alt="Logo do Turbo Ofertas"
-          width={88}
-          height={88}
+          width={36}
+          height={36}
         />
-        <div className="profile__identity">
-          <span className="profile__name">{brand.name}</span>
-          <span className="profile__tagline">{brand.tagline}</span>
-        </div>
+        <span className="brand-name">{brand.name}</span>
       </div>
 
-      <h1 className="profile__headline">{brand.headline}</h1>
+      <h1 className="profile__headline">{headline}</h1>
+      <p className="profile__support">{support}</p>
     </header>
   );
 }

@@ -1,35 +1,47 @@
 import { track } from "@vercel/analytics";
 import { Analytics } from "@vercel/analytics/react";
-import { brand, groups } from "./data/config";
+import { abVariants, brand, getVariant, redirects } from "./data/config";
 import { Profile } from "./components/Profile";
-import { GroupButton } from "./components/GroupButton";
-import { BotShowcase } from "./components/BotShowcase";
+import { OfferProof } from "./components/OfferProof";
 import { Categories } from "./components/Categories";
-import { Highlights } from "./components/Highlights";
 import { Footer } from "./components/Footer";
 import { PlatformIcon } from "./components/Icons";
 
 export default function App() {
-  const activeGroups = groups.filter((g) => g.status === "ativo");
-  const whatsappGroup = groups.find((g) => g.platform === "whatsapp");
+  const variant = getVariant();
+  const currentVariant = abVariants[variant];
 
-  const handleStickyClick = () => {
-    if (!whatsappGroup) return;
-
+  const handleCtaClick = (placement: "hero" | "sticky" | "final") => {
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Lead", {
-        content_name: whatsappGroup.title,
+        content_name: currentVariant.buttonText,
         platform: "whatsapp",
-        placement: "sticky",
+        placement,
+        variant,
       });
     }
 
     try {
       track("cta_click", {
-        title: whatsappGroup.title,
+        title: currentVariant.buttonText,
         platform: "whatsapp",
-        placement: "sticky",
-        url: whatsappGroup.url,
+        placement,
+        variant,
+        url: redirects.whatsapp,
+      });
+    } catch {
+      // safe fallback
+    }
+  };
+
+  const handleTelegramClick = () => {
+    try {
+      track("cta_click", {
+        title: brand.telegramText,
+        platform: "telegram",
+        placement: "hero_secondary",
+        variant,
+        url: redirects.telegram,
       });
     } catch {
       // safe fallback
@@ -38,103 +50,115 @@ export default function App() {
 
   return (
     <main className="page">
-      {/* 1. Hero Automotivo: Identidade e Headline */}
-      <Profile />
+      {/* 1. Primeira Tela: Hero Direto & Botão Principal (visível sem rolar em 375x667) */}
+      <section className="hero-section" aria-label="Apresentação e entrada no grupo">
+        <Profile
+          headline={currentVariant.headline}
+          support={currentVariant.support}
+        />
 
-      {/* 2. CTAs Principais Logo Após a Headline */}
-      <section className="cta-block" aria-label="Grupos principais">
-        <div className="cta-block__header">
-          <span className="cta-block__pulse" aria-hidden="true" />
-          <span className="cta-block__text">Escolha onde prefere receber as ofertas:</span>
-        </div>
-        <nav className="stack" aria-label="Grupos principais de ofertas">
-          {activeGroups.map((g) => (
-            <GroupButton key={g.url} group={g} placement="main" />
-          ))}
-        </nav>
-      </section>
-
-      {/* 3. Prova de Confiança e Descrição Complementar */}
-      <section className="hero-reassurance" aria-label="Garantias dos grupos">
-        <div className="trust-pills">
-          {brand.trustBadges.map((badge, idx) => (
-            <span key={idx} className="trust-pill">
-              <span className="trust-pill__icon" aria-hidden="true">
-                {badge.icon}
-              </span>
-              <span className="trust-pill__text">{badge.text}</span>
-            </span>
-          ))}
-        </div>
-        <p className="profile__desc">{brand.description}</p>
-      </section>
-
-      {/* 4. Destaque: Bot Ofertas Todo Dia (Vídeo Institucional e Demonstração) */}
-      <BotShowcase />
-
-      {/* 5. Seção Visual de Categorias Automotivas */}
-      <Categories />
-
-      {/* 6. Prova de Confiança e Diferenciais */}
-      <Highlights />
-
-      {/* 7. Repetição Estratégica dos CTAs no Final da Página */}
-      <section className="bottom-cta" aria-labelledby="cta-bottom-title">
-        <div className="bottom-cta__card">
-          <div className="bottom-cta__tag">
-            <span>🏁</span> 100% Gratuito & Acesso Imediato
-          </div>
-          <h3 id="cta-bottom-title" className="bottom-cta__title">
-            Pronto para economizar no seu carro?
-          </h3>
-          <p className="bottom-cta__desc">
-            Ofertas com bugs de preço e cupons da Shopee toda semana, direto no seu celular.
-          </p>
-          <div className="stack">
-            {activeGroups.map((g) => (
-              <GroupButton key={`bottom-${g.url}`} group={g} placement="bottom" />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. Rodapé com Isenção e Direitos */}
-      <Footer />
-
-      {/* 9. Botão Fixo no Rodapé no Celular (abaixo de 640px) */}
-      {whatsappGroup && (
-        <aside className="sticky-cta" aria-label="Acesso rápido ao WhatsApp">
+        <div className="hero-cta-wrap">
           <a
-            href={whatsappGroup.url}
+            href={redirects.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="sticky-cta__btn"
-            onClick={handleStickyClick}
+            className="main-cta-btn"
+            onClick={() => handleCtaClick("hero")}
+            id="btn-hero-whatsapp"
           >
-            <span className="sticky-cta__icon">
+            <span className="main-cta-btn__icon">
               <PlatformIcon platform="whatsapp" />
             </span>
-            <span className="sticky-cta__info">
-              <strong className="sticky-cta__title">Entrar no Grupo VIP do WhatsApp</strong>
-              <small className="sticky-cta__subtitle">Grátis • Sem Spam • Vagas Abertas</small>
+            <span className="main-cta-btn__text">
+              {currentVariant.buttonText}
             </span>
-            <span className="sticky-cta__arrow" aria-hidden="true">
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </span>
+            <span className="main-cta-btn__arrow" aria-hidden="true">→</span>
           </a>
-        </aside>
-      )}
+
+          <p className="reassurance-text">{brand.reassurance}</p>
+
+          <a
+            href={redirects.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="telegram-alt-link"
+            onClick={handleTelegramClick}
+          >
+            {brand.telegramText} →
+          </a>
+        </div>
+      </section>
+
+      {/* 2. Prova do que a pessoa vai receber no grupo */}
+      <OfferProof />
+
+      {/* 3. Categorias em linha de chips curtos */}
+      <Categories />
+
+      {/* 4. Selos rápidos de confiança */}
+      <section className="trust-strip" aria-label="Garantias da comunidade">
+        {brand.trustBadges.map((badge, idx) => (
+          <div key={idx} className="trust-strip__item">
+            <span className="trust-strip__icon" aria-hidden="true">{badge.icon}</span>
+            <span className="trust-strip__text">{badge.text}</span>
+          </div>
+        ))}
+      </section>
+
+      {/* 5. Repetição do Botão no fim da página antes do rodapé */}
+      <section className="final-cta-section" aria-label="Chamada final para o grupo">
+        <div className="final-cta-card">
+          <h2 className="final-cta-title">
+            Não perca a próxima oferta com bug de preço
+          </h2>
+          <p className="final-cta-support">
+            Entre agora e receba os alertas direto no seu WhatsApp.
+          </p>
+
+          <a
+            href={redirects.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="main-cta-btn"
+            onClick={() => handleCtaClick("final")}
+            id="btn-final-whatsapp"
+          >
+            <span className="main-cta-btn__icon">
+              <PlatformIcon platform="whatsapp" />
+            </span>
+            <span className="main-cta-btn__text">
+              {currentVariant.buttonText}
+            </span>
+            <span className="main-cta-btn__arrow" aria-hidden="true">→</span>
+          </a>
+
+          <p className="reassurance-text">{brand.reassurance}</p>
+        </div>
+      </section>
+
+      {/* 6. Rodapé com link discreto do bot e transparência */}
+      <Footer />
+
+      {/* 7. Botão fixo no rodapé no celular (abaixo de 640px) */}
+      <aside className="sticky-cta" aria-label="Acesso fixo ao WhatsApp">
+        <a
+          href={redirects.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="sticky-cta__btn"
+          onClick={() => handleCtaClick("sticky")}
+          id="btn-sticky-whatsapp"
+        >
+          <span className="sticky-cta__icon">
+            <PlatformIcon platform="whatsapp" />
+          </span>
+          <span className="sticky-cta__text">
+            <strong>{currentVariant.buttonText}</strong>
+            <small>Grátis • Sem Spam</small>
+          </span>
+          <span className="sticky-cta__arrow" aria-hidden="true">→</span>
+        </a>
+      </aside>
 
       <Analytics />
     </main>

@@ -1,13 +1,43 @@
+import { redirects } from "../data/config";
+import { track } from "@vercel/analytics";
+
 export function Footer() {
+  const handleBotClick = () => {
+    try {
+      track("cta_click", {
+        title: "Bot Comparador no Telegram",
+        platform: "telegram_bot",
+        placement: "footer",
+        url: redirects.bot,
+      });
+    } catch {
+      // safe fallback
+    }
+  };
+
   return (
     <footer className="footer">
-      <p className="footer__brand">Turbo Ofertas Automotivas | Economia Inteligente para seu Veículo</p>
-      <p>
-        <strong>Como funciona:</strong> Nossa curadoria e inteligência artificial monitoram bugs de preço, cupons escondidos e promoções relâmpago 24 horas por dia na Shopee e grandes marketplaces.
+      <div className="footer__secondary-bot">
+        <span>Quer comparar o preço de outro item? </span>
+        <a
+          href={redirects.bot}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer__bot-link"
+          onClick={handleBotClick}
+        >
+          Chamar nosso Bot no Telegram →
+        </a>
+      </div>
+
+      <p className="footer__brand">
+        Turbo Ofertas • Comunidade de Economia Automotiva
       </p>
-      <p>
-        <strong>Transparência:</strong> O acesso aos grupos e ao bot é 100% gratuito. Participamos de programas de afiliados e podemos receber uma comissão caso você realize compras através dos links indicados, sem nenhum custo extra para você. Preços e estoques estão sujeitos a alteração pelas lojas parceiras.
+
+      <p className="footer__disclaimer">
+        <strong>Transparência:</strong> O acesso ao grupo do WhatsApp é 100% gratuito. Participamos de programas de afiliados e podemos receber comissões por compras realizadas através dos links indicados, sem custo extra para você.
       </p>
+
       <p className="footer__copy">
         © {new Date().getFullYear()} Turbo Ofertas. Todos os direitos reservados.
       </p>

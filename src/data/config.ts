@@ -1,43 +1,60 @@
 /**
- * Arquivo de configuração de marca, grupos e categorias automotivas.
+ * Configuração central do turbo-links: rotas de redirecionamento,
+ * variantes A/B, categorias e dados do grupo.
  */
 
-export type Platform = "telegram" | "whatsapp";
+export type Platform = "whatsapp" | "telegram";
 export type Status = "ativo" | "em-breve";
 
-export interface VisualCategory {
-  id: string;
-  name: string;
-  icon: string;
-  tag: string;
-  description: string;
-  examples: string[];
+export const redirects = {
+  whatsapp: "/go/whatsapp",
+  telegram: "/go/telegram",
+  bot: "/go/bot",
+};
+
+export const externalUrls = {
+  whatsapp: "https://chat.whatsapp.com/BvxUXtqwkgoEYTEKKdLG8G?s=sw&p=i&mlu=4&ilr=4",
+  telegram: "https://t.me/turboofertass",
+  bot: "https://t.me/ofertas_toda_hora_bot?start=site",
+};
+
+export interface ABVariant {
+  headline: string;
+  support: string;
+  buttonText: string;
 }
 
-export interface Group {
-  title: string;
-  description: string;
-  categoryId: string;
-  platform: Platform;
-  url: string;
-  status: Status;
-  badge?: string;
-  featured?: boolean;
-  image?: string;
+export const abVariants: Record<"a" | "b", ABVariant> = {
+  a: {
+    // 9 palavras - benefício direto, sem números inventados
+    headline: "Peças e Acessórios Automotivos com Cupons e Preços Baixos",
+    support: "Promoções e cupons da Shopee todos os dias direto no seu WhatsApp.",
+    buttonText: "Entrar no grupo grátis no WhatsApp",
+  },
+  b: {
+    // 9 palavras - benefício focado em economia e utilidade
+    headline: "Economize em Peças, Ferramentas e Acessórios para seu Carro",
+    support: "Alertas diários de ofertas selecionadas na Shopee sem spam.",
+    buttonText: "Quero entrar no grupo VIP grátis",
+  },
+};
+
+export function getVariant(): "a" | "b" {
+  if (typeof window === "undefined") return "a";
+  const params = new URLSearchParams(window.location.search);
+  return params.get("v")?.toLowerCase() === "b" ? "b" : "a";
 }
 
 export const brand = {
   name: "Turbo Ofertas",
-  tagline: "Achadinhos & Peças Automotivas",
-  headline: "Economize até 70% em Peças, Acessórios e Ferramentas para seu Carro",
-  radar: "Radar de Ofertas Ativo • Shopee e Grandes Lojas",
-  description:
-    "Grupos VIP para economizar em peças, ferramentas e estética automotiva. Quer economizar em outro item? Envie o link de qualquer produto para nosso bot no Telegram e receba o menor preço!",
+  logo: "/logo.svg",
+  reassurance: "Grátis. Sem spam. Saia quando quiser.",
+  telegramText: "Prefere o Telegram? Entre no canal oficial",
   trustBadges: [
     { icon: "🛡️", text: "100% Gratuito" },
-    { icon: "⚡", text: "Alertas em Tempo Real" },
     { icon: "🚫", text: "Zero Spam" },
     { icon: "🔒", text: "Links Verificados" },
+    { icon: "⚡", text: "Alertas Diários" },
   ],
   highlights: [
     {
@@ -56,78 +73,41 @@ export const brand = {
       desc: "Curadoria especializada em estética, ferramentas e manutenção que realmente valem a pena.",
     },
   ],
-  logo: "/logo.svg",
 };
 
-export const visualCategories: VisualCategory[] = [
-  {
-    id: "estetica",
-    name: "Estética Automotiva",
-    icon: "✨",
-    tag: "Cupons Shopee",
-    description: "Ceras, vitrificadores, shampoos neutros, toalhas de microfibra e politrizes.",
-    examples: ["Ceras & Selantes", "Microfibras 500GSM", "Politrizes", "Shampoos Automotivos"],
-  },
-  {
-    id: "acessorios",
-    name: "Acessórios para Carros",
-    icon: "🚘",
-    tag: "Achadinhos",
-    description: "Suportes veiculares, iluminação LED, organizadores, centrais e carregadores turbo.",
-    examples: ["Suportes Magnéticos", "LEDs Internos/Externos", "Centrais Multimídia", "Organizadores"],
-  },
-  {
-    id: "ferramentas",
-    name: "Ferramentas & Oficina",
-    icon: "🔧",
-    tag: "Melhores Preços",
-    description: "Scanners OBD2, jogos de catraca, calibradores digitais e compressores portáteis 12V.",
-    examples: ["Scanner OBD2 Bluetooth", "Maleta de Ferramentas", "Compressores Portáteis"],
-  },
-  {
-    id: "manutencao",
-    name: "Peças & Manutenção",
-    icon: "🏁",
-    tag: "Descontos Reais",
-    description: "Filtros de ar, palhetas de silicone, lâmpadas super brancas, aditivos e fluidos.",
-    examples: ["Filtros Esportivos", "Palhetas de Silicone", "Aditivos & Óleos", "Lâmpadas H4/H7"],
-  },
+/**
+ * Dados reais do grupo. Só mostre se comprováveis.
+ * Deixe vazio ("") para ocultar e não exibir contadores inventados.
+ */
+export const groupRealData = {
+  lastOfferTime: "", // Ex: "Última oferta hoje às 14:30" (deixe vazio se não tiver)
+  offersToday: "",    // Ex: "18 ofertas postadas hoje" (deixe vazio se não tiver)
+};
+
+export interface CategoryChip {
+  id: string;
+  icon: string;
+  name: string;
+}
+
+export const categoryChips: CategoryChip[] = [
+  { id: "estetica", icon: "✨", name: "Estética Automotiva" },
+  { id: "acessorios", icon: "🚘", name: "Acessórios" },
+  { id: "ferramentas", icon: "🔧", name: "Ferramentas & Oficina" },
+  { id: "manutencao", icon: "🏁", name: "Peças & Manutenção" },
 ];
 
-export const botInfo = {
-  name: "Ofertas Todo Dia",
-  handle: "@ofertas_toda_hora_bot",
-  url: "https://t.me/ofertas_toda_hora_bot?start=site",
-  tagline: "Comparador de Preços com Inteligência Artificial",
-  badge: "Novo • Gratuito no Telegram",
-  description:
-    "Você manda o link de qualquer produto que quer comprar. Nosso bot analisa o produto, varre a internet procurando o mesmo item mais barato e te devolve o link com o menor preço direto na conversa!",
-  steps: [
-    {
-      num: "1",
-      title: "Copie o link do produto",
-      desc: "Viu algo que quer comprar? Basta copiar o link em qualquer loja ou marketplace.",
-      icon: "🔗",
-    },
-    {
-      num: "2",
-      title: "Envie para o bot no Telegram",
-      desc: "Cole o link na conversa com o @ofertas_toda_hora_bot. Ele analisa em segundos.",
-      icon: "💬",
-    },
-    {
-      num: "3",
-      title: "Receba o link mais barato",
-      desc: "O bot encontra o mesmo produto por um preço menor e te envia o link direto com a economia.",
-      icon: "💰",
-    },
-  ],
-  stats: [
-    { label: "Economia", value: "Menor Preço" },
-    { label: "Velocidade", value: "Em segundos" },
-    { label: "Acesso", value: "100% Gratuito" },
-  ],
-};
+export interface Group {
+  title: string;
+  description: string;
+  categoryId: string;
+  platform: Platform;
+  url: string;
+  status: Status;
+  badge?: string;
+  featured?: boolean;
+  image?: string;
+}
 
 export const groups: Group[] = [
   {
@@ -136,28 +116,36 @@ export const groups: Group[] = [
     categoryId: "automotivo",
     platform: "whatsapp",
     badge: "Mais Recomendado",
-    url: "https://chat.whatsapp.com/BvxUXtqwkgoEYTEKKdLG8G?s=sw&p=i&mlu=4&ilr=4",
+    url: redirects.whatsapp,
     status: "ativo",
     featured: true,
   },
   {
-    title: "Chamar o Bot no Telegram",
-    description: "Envie o link de qualquer produto e ele acha mais barato.",
-    categoryId: "automotivo",
-    platform: "telegram",
-    badge: "Comparador",
-    url: "https://t.me/ofertas_toda_hora_bot?start=site",
-    status: "ativo",
-    featured: false,
-  },
-  {
     title: "Entrar no Canal do Telegram",
-    description: "Histórico completo de ofertas e achadinhos.",
+    description: "Histórico de ofertas e achadinhos.",
     categoryId: "automotivo",
     platform: "telegram",
     badge: "Canal Oficial",
-    url: "https://t.me/turboofertass",
+    url: redirects.telegram,
     status: "ativo",
     featured: false,
   },
 ];
+
+export const botInfo = {
+  name: "Ofertas Todo Dia",
+  handle: "@ofertas_toda_hora_bot",
+  url: redirects.bot,
+  badge: "Gratuito no Telegram",
+  description: "Envie o link de qualquer produto e encontre o menor preço.",
+  steps: [
+    { num: "1", title: "Copie o link", desc: "Copie o link do produto", icon: "🔗" },
+    { num: "2", title: "Envie no Telegram", desc: "Cole na conversa com o bot", icon: "💬" },
+    { num: "3", title: "Receba o menor preço", desc: "Link direto com a economia", icon: "💰" },
+  ],
+  stats: [
+    { label: "Economia", value: "Menor Preço" },
+    { label: "Velocidade", value: "Em segundos" },
+    { label: "Acesso", value: "100% Gratuito" },
+  ],
+};
