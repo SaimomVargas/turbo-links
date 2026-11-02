@@ -9,6 +9,7 @@
   --blue: #0a5ea8;
   --radius: 8px;
 }
+
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 html, body { margin: 0; }
@@ -16,17 +17,20 @@ body {
   background: #fff;
   color: var(--text);
   font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  text-align: left;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }
 a { color: inherit; }
+
 .page {
   max-width: 480px;
   margin: 0 auto;
   padding: calc(24px + env(safe-area-inset-top, 0px)) 20px calc(48px + env(safe-area-inset-bottom, 0px));
 }
 
-/* Topo */
+/* Topo e Apresentação */
+.hero-section { margin: 0; }
 .brand-header { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
 .brand-logo { width: 28px; height: 28px; border-radius: 6px; display: block; }
 .brand-name { font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em; }
@@ -39,48 +43,108 @@ a { color: inherit; }
   text-wrap: balance;
 }
 .profile__support { margin: 0 0 24px; font-size: 1.02rem; color: var(--muted); text-wrap: pretty; }
+.hero-cta-wrap { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
 
-/* Botão principal */
+/* Botão principal e botão fixo */
 .main-cta-btn, .sticky-cta__btn {
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  width: 100%; min-height: 56px; padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 18px;
   border-radius: var(--radius);
-  background: var(--green); color: #fff;
-  text-decoration: none; font-weight: 600; font-size: 1.05rem; line-height: 1.25; text-align: center;
+  background: var(--green);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.25;
   transition: background-color 0.15s ease;
 }
 .main-cta-btn:hover, .sticky-cta__btn:hover { background: var(--green-dark); }
 .main-cta-btn:active, .sticky-cta__btn:active { background: #094d2c; }
-.main-cta-btn:focus-visible, .sticky-cta__btn:focus-visible,
-.telegram-alt-link:focus-visible, .footer__bot-link:focus-visible {
-  outline: 3px solid var(--blue); outline-offset: 2px;
+
+/* Rótulo colado ao ícone */
+.main-cta-btn__text {
+  flex: 0 1 auto;
+  text-align: left;
+  text-wrap: balance;
 }
-.main-cta-btn__icon, .sticky-cta__icon { display: flex; flex-shrink: 0; }
-.main-cta-btn__icon svg, .sticky-cta__icon svg { width: 24px; height: 24px; }
-/* Ícone do WhatsApp em branco sobre o verde do botão */
-.main-cta-btn__icon svg path:first-child, .sticky-cta__icon svg path:first-child { fill: none; stroke: #fff; stroke-width: 1.5; }
+
+/* Ícone do WhatsApp: círculo branco e telefone verde */
+.main-cta-btn__icon, .sticky-cta__icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+}
+.main-cta-btn__icon svg, .sticky-cta__icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+.main-cta-btn__icon svg path:first-child,
+.sticky-cta__icon svg path:first-child {
+  fill: #fff;
+  stroke: none;
+}
+.main-cta-btn__icon svg path:last-child,
+.sticky-cta__icon svg path:last-child {
+  fill: var(--green);
+  transition: fill 0.15s ease;
+}
+.main-cta-btn:hover .main-cta-btn__icon svg path:last-child,
+.sticky-cta__btn:hover .sticky-cta__icon svg path:last-child {
+  fill: var(--green-dark);
+}
+.main-cta-btn:active .main-cta-btn__icon svg path:last-child,
+.sticky-cta__btn:active .sticky-cta__icon svg path:last-child {
+  fill: #094d2c;
+}
+
+/* Textos auxiliares do Hero */
 .reassurance-text { margin: 12px 0 0; font-size: 0.88rem; color: var(--muted); }
 .telegram-alt-link {
-  display: inline-block; margin-top: 8px; padding: 10px 0;
-  font-size: 0.92rem; color: var(--blue); text-decoration: underline; text-underline-offset: 3px;
+  display: inline-block;
+  margin-top: 8px;
+  padding: 10px 0;
+  font-size: 0.92rem;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
 }
-.telegram-alt-link:hover { color: #084a85; }
+.telegram-alt-link:hover { color: var(--green); }
+
+/* Foco por teclado */
+.main-cta-btn:focus-visible,
+.sticky-cta__btn:focus-visible,
+.telegram-alt-link:focus-visible,
+.footer__bot-link:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
 
 /* Prova do grupo */
-.offer-proof { margin: 40px 0 0; }
+.offer-proof { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line); }
+.proof-header { margin: 0 0 12px; }
 .proof-title { margin: 0 0 8px; font-size: 1.1rem; line-height: 1.3; font-weight: 700; }
 .proof-real-status { margin: 0 0 12px; font-size: 0.92rem; color: var(--muted); }
 .proof-card { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--bg-soft); }
 .proof-image { width: 100%; height: auto; display: block; }
 
 /* Categorias e garantias */
-.categories-chips-section { margin: 36px 0 0; padding-top: 20px; border-top: 1px solid var(--line); }
+.categories-chips-section { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); }
 .categories-chips-label { display: block; margin-bottom: 4px; font-size: 0.85rem; color: var(--muted); }
 .categories-line { margin: 0; font-size: 1rem; }
 .trust-line { margin: 12px 0 0; font-size: 0.88rem; color: var(--muted); }
 
 /* Bloco final */
-.final-cta-section { margin: 40px 0 0; padding-top: 28px; border-top: 1px solid var(--line); }
+.final-cta-section { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
+.final-cta-card { margin: 0; }
 .final-cta-title { margin: 0 0 6px; font-size: 1.3rem; line-height: 1.25; font-weight: 700; letter-spacing: -0.01em; text-wrap: balance; }
 .final-cta-support { margin: 0 0 18px; color: var(--muted); }
 
@@ -88,31 +152,71 @@ a { color: inherit; }
 .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 0.82rem; line-height: 1.55; color: var(--muted); }
 .footer p { margin: 0 0 10px; }
 .footer__secondary-bot { margin: 0 0 16px; font-size: 0.9rem; }
-.footer__bot-link { color: var(--blue); text-underline-offset: 3px; }
+.footer__bot-link { color: var(--text); text-decoration: underline; text-underline-offset: 3px; transition: color 0.15s ease; }
+.footer__bot-link:hover { color: var(--green); }
 .footer__brand { font-weight: 600; color: var(--text); }
 .footer__disclaimer { max-width: 52ch; }
+.footer__copy { font-size: 0.78rem; color: var(--muted); }
 
-/* Botão fixo (celular) */
+/* Botão fixo no celular (abaixo de 640px) */
 .sticky-cta { display: none; }
 @media (max-width: 639px) {
   .page { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
   .sticky-cta {
-    display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
     padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
-    background: #fff; border-top: 1px solid var(--line);
+    background: #fff;
+    border-top: 1px solid var(--line);
   }
   .sticky-cta__btn { min-height: 52px; padding: 8px 16px; }
-  .sticky-cta__text { display: flex; flex-direction: column; align-items: center; line-height: 1.2; }
+  .sticky-cta__text {
+    flex: 0 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.2;
+  }
+  .sticky-cta__text strong { font-size: 0.95rem; font-weight: 600; }
   .sticky-cta__text small { font-size: 0.75rem; font-weight: 400; opacity: 0.92; }
 }
+
+/* Responsividade Desktop e Mobile Pequeno */
 @media (min-width: 640px) {
-  .page { padding-top: 64px; }
+  .page {
+    max-width: 520px;
+    padding-top: 64px;
+  }
   .brand-header { margin-bottom: 40px; }
 }
-@media (max-width: 360px) {
-  .page { padding-left: 16px; padding-right: 16px; }
-  .main-cta-btn { font-size: 1rem; }
+
+@media (max-width: 400px) {
+  .main-cta-btn, .sticky-cta__btn {
+    font-size: 1rem;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+  .main-cta-btn__icon svg, .sticky-cta__icon svg {
+    width: 22px;
+    height: 22px;
+  }
 }
+
+@media (max-width: 360px) {
+  .page {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .main-cta-btn, .sticky-cta__btn { transition: none; }
+  .main-cta-btn, .sticky-cta__btn,
+  .main-cta-btn__icon svg path:last-child, .sticky-cta__icon svg path:last-child,
+  .telegram-alt-link, .footer__bot-link {
+    transition: none;
+  }
 }
