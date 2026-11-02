@@ -26,7 +26,6 @@ export function OfferProof({ customImageSrc = "/print-oferta.png" }: OfferProofP
   return (
     <section className="offer-proof" aria-labelledby="proof-title">
       <div className="proof-header">
-        <span className="proof-eyebrow">Transparência Total</span>
         <h2 id="proof-title" className="proof-title">
           Veja o que chega no grupo
         </h2>

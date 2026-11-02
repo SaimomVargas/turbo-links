@@ -45,7 +45,7 @@ export function Footer({ variant: propVariant }: FooterProps) {
           className="footer__bot-link"
           onClick={handleBotClick}
         >
-          Chamar nosso Bot no Telegram →
+          Chamar nosso Bot no Telegram
         </a>
       </div>
 

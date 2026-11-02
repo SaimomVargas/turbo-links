@@ -110,7 +110,6 @@ export default function App() {
             <span className="main-cta-btn__text">
               {currentVariant.buttonText}
             </span>
-            <span className="main-cta-btn__arrow" aria-hidden="true">→</span>
           </a>
 
           <p className="reassurance-text">{brand.reassurance}</p>
@@ -122,7 +121,7 @@ export default function App() {
             className="telegram-alt-link"
             onClick={handleTelegramClick}
           >
-            {brand.telegramText} →
+            {brand.telegramText}
           </a>
         </div>
       </section>
@@ -134,20 +133,13 @@ export default function App() {
       <Categories />
 
       {/* 4. Selos rápidos de confiança */}
-      <section className="trust-strip" aria-label="Garantias da comunidade">
-        {brand.trustBadges.map((badge, idx) => (
-          <div key={idx} className="trust-strip__item">
-            <span className="trust-strip__icon" aria-hidden="true">{badge.icon}</span>
-            <span className="trust-strip__text">{badge.text}</span>
-          </div>
-        ))}
-      </section>
+      <p className="trust-line">{brand.trustBadges.map((b) => b.text).join(" · ")}</p>
 
       {/* 5. Repetição do Botão no fim da página antes do rodapé */}
       <section className="final-cta-section" aria-label="Chamada final para o grupo">
         <div className="final-cta-card">
           <h2 className="final-cta-title">
-            Não perca a próxima oferta com bug de preço
+            Entre no grupo e receba as ofertas
           </h2>
           <p className="final-cta-support">
             Entre agora e receba os alertas direto no seu WhatsApp.
@@ -167,7 +159,6 @@ export default function App() {
             <span className="main-cta-btn__text">
               {currentVariant.buttonText}
             </span>
-            <span className="main-cta-btn__arrow" aria-hidden="true">→</span>
           </a>
 
           <p className="reassurance-text">{brand.reassurance}</p>
@@ -193,9 +184,8 @@ export default function App() {
             </span>
             <span className="sticky-cta__text">
               <strong>{currentVariant.buttonText}</strong>
-              <small>Grátis • Sem Spam</small>
+              <small>Grátis. Sem spam.</small>
             </span>
-            <span className="sticky-cta__arrow" aria-hidden="true">→</span>
           </a>
         </aside>
       )}
