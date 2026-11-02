@@ -1,4 +1,4 @@
-import { getVariant, redirects } from "../data/config";
+import { getVariant, getUtmParams, redirects } from "../data/config";
 import { track } from "@vercel/analytics";
 
 interface FooterProps {
@@ -9,12 +9,14 @@ export function Footer({ variant: propVariant }: FooterProps) {
   const variant = propVariant || getVariant();
 
   const handleBotClick = () => {
+    const utms = getUtmParams();
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Lead", {
         content_name: "Bot Comparador no Telegram",
         platform: "telegram",
         placement: "footer",
         variant,
+        ...utms,
       });
     }
 
@@ -25,6 +27,7 @@ export function Footer({ variant: propVariant }: FooterProps) {
         placement: "footer",
         variant,
         url: redirects.bot,
+        ...utms,
       });
     } catch {
       // safe fallback

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 import { Analytics } from "@vercel/analytics/react";
-import { abVariants, brand, getVariant, redirects } from "./data/config";
+import { abVariants, brand, getVariant, getUtmParams, redirects } from "./data/config";
 import { Profile } from "./components/Profile";
 import { OfferProof } from "./components/OfferProof";
 import { Categories } from "./components/Categories";
@@ -34,12 +34,14 @@ export default function App() {
   }, []);
 
   const handleCtaClick = (placement: "hero" | "sticky" | "final") => {
+    const utms = getUtmParams();
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Lead", {
         content_name: currentVariant.buttonText,
         platform: "whatsapp",
         placement,
         variant,
+        ...utms,
       });
     }
 
@@ -50,6 +52,7 @@ export default function App() {
         placement,
         variant,
         url: redirects.whatsapp,
+        ...utms,
       });
     } catch {
       // safe fallback
@@ -57,12 +60,14 @@ export default function App() {
   };
 
   const handleTelegramClick = () => {
+    const utms = getUtmParams();
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Lead", {
         content_name: brand.telegramText,
         platform: "telegram",
         placement: "hero_secondary",
         variant,
+        ...utms,
       });
     }
 
@@ -73,6 +78,7 @@ export default function App() {
         placement: "hero_secondary",
         variant,
         url: redirects.telegram,
+        ...utms,
       });
     } catch {
       // safe fallback

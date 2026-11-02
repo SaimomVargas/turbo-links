@@ -40,6 +40,32 @@ export function getVariant(): "a" | "b" {
   return params.get("v")?.toLowerCase() === "b" ? "b" : "a";
 }
 
+export interface UtmParams {
+  utm_source?: string;
+  utm_medium?: string;
+  utm_campaign?: string;
+  utm_content?: string;
+  utm_term?: string;
+}
+
+export function getUtmParams(): UtmParams {
+  if (typeof window === "undefined") return {};
+  const params = new URLSearchParams(window.location.search);
+  const utms: UtmParams = {};
+  const fields: (keyof UtmParams)[] = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_content",
+    "utm_term",
+  ];
+  fields.forEach((k) => {
+    const v = params.get(k);
+    if (v) utms[k] = v;
+  });
+  return utms;
+}
+
 export const brand = {
   name: "Turbo Ofertas",
   logo: "/logo.svg",
@@ -48,10 +74,6 @@ export const brand = {
   trustBadges: [
     { icon: "🛡️", text: "100% Gratuito" },
     { icon: "🚫", text: "Zero Spam" },
-    // TODO (Confirmação necessária): Confirme se "Links Verificados" e "Alertas Diários"
-    // são de fato verdadeiros para o seu grupo antes de manter ativos em produção.
-    { icon: "🔒", text: "Links Verificados" },
-    { icon: "⚡", text: "Alertas Diários" },
   ],
 };
 
