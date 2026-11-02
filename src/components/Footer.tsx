@@ -12,17 +12,19 @@ export function Footer({ variant: propVariant }: FooterProps) {
     const utms = getUtmParams();
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Lead", {
-        content_name: "Bot Comparador no Telegram",
-        platform: "telegram",
+        title: "Bot comparador no Telegram",
+        content_name: "Bot comparador no Telegram",
+        platform: "telegram_bot",
         placement: "footer",
         variant,
+        url: redirects.bot,
         ...utms,
       });
     }
 
     try {
       track("cta_click", {
-        title: "Bot Comparador no Telegram",
+        title: "Bot comparador no Telegram",
         platform: "telegram_bot",
         placement: "footer",
         variant,
@@ -45,16 +47,16 @@ export function Footer({ variant: propVariant }: FooterProps) {
           className="footer__bot-link"
           onClick={handleBotClick}
         >
-          Chamar nosso Bot no Telegram
+          Chamar nosso bot no Telegram
         </a>
       </div>
 
       <p className="footer__brand">
-        Turbo Ofertas • Comunidade de Economia Automotiva
+        Turbo Ofertas
       </p>
 
       <p className="footer__disclaimer">
-        <strong>Transparência:</strong> O acesso ao grupo do WhatsApp é 100% gratuito. Participamos de programas de afiliados e podemos receber comissões por compras realizadas através dos links indicados, sem custo extra para você.
+        <strong>Transparência:</strong> o acesso ao grupo no WhatsApp é 100% gratuito. Participamos de programas de afiliados e podemos receber comissões por compras realizadas através dos links indicados, sem custo adicional para você.
       </p>
 
       <p className="footer__copy">

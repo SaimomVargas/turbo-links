@@ -32,7 +32,7 @@ export function OfferProof({ customImageSrc = "/print-oferta.png" }: OfferProofP
         {hasRealData && (
           <p className="proof-real-status">
             {groupRealData.offersToday && <span>{groupRealData.offersToday}</span>}
-            {groupRealData.lastOfferTime && <span> • {groupRealData.lastOfferTime}</span>}
+            {groupRealData.lastOfferTime && <span> · {groupRealData.lastOfferTime}</span>}
           </p>
         )}
       </div>

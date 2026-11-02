@@ -12,35 +12,50 @@ export default function App() {
   const variant = getVariant();
   const currentVariant = abVariants[variant];
 
-  const [showSticky, setShowSticky] = useState(false);
+  const [heroOffscreen, setHeroOffscreen] = useState(false);
+  const [finalVisible, setFinalVisible] = useState(false);
   const heroBtnRef = useRef<HTMLAnchorElement>(null);
+  const finalCtaRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const target = heroBtnRef.current;
-    if (!target || typeof IntersectionObserver === "undefined") return;
+    if (typeof IntersectionObserver === "undefined") return;
+
+    const heroEl = heroBtnRef.current;
+    const finalEl = finalCtaRef.current;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Mostra o botão fixo no mobile apenas depois que o botão do hero sair da tela
-        setShowSticky(!entry.isIntersecting);
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === heroEl) {
+            setHeroOffscreen(!entry.isIntersecting);
+          } else if (entry.target === finalEl) {
+            setFinalVisible(entry.isIntersecting);
+          }
+        });
       },
       {
         threshold: 0,
       }
     );
 
-    observer.observe(target);
+    if (heroEl) observer.observe(heroEl);
+    if (finalEl) observer.observe(finalEl);
+
     return () => observer.disconnect();
   }, []);
+
+  const showSticky = heroOffscreen && !finalVisible;
 
   const handleCtaClick = (placement: "hero" | "sticky" | "final") => {
     const utms = getUtmParams();
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Lead", {
+        title: currentVariant.buttonText,
         content_name: currentVariant.buttonText,
         platform: "whatsapp",
         placement,
         variant,
+        url: redirects.whatsapp,
         ...utms,
       });
     }
@@ -63,10 +78,12 @@ export default function App() {
     const utms = getUtmParams();
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Lead", {
+        title: brand.telegramText,
         content_name: brand.telegramText,
         platform: "telegram",
         placement: "hero_secondary",
         variant,
+        url: redirects.telegram,
         ...utms,
       });
     }
@@ -136,13 +153,13 @@ export default function App() {
       <p className="trust-line">{brand.trustBadges.map((b) => b.text).join(" · ")}</p>
 
       {/* 5. Repetição do Botão no fim da página antes do rodapé */}
-      <section className="final-cta-section" aria-label="Chamada final para o grupo">
+      <section ref={finalCtaRef} className="final-cta-section" aria-label="Chamada final para o grupo">
         <div className="final-cta-card">
           <h2 className="final-cta-title">
-            Entre no grupo e receba as ofertas
+            Acompanhe as ofertas no WhatsApp
           </h2>
           <p className="final-cta-support">
-            Entre agora e receba os alertas direto no seu WhatsApp.
+            Receba cupons e promoções da Shopee direto no seu celular.
           </p>
 
           <a
