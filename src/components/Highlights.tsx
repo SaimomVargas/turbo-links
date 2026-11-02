@@ -8,7 +8,7 @@ export function Highlights() {
       <div className="section-header">
         <span className="section-eyebrow">Diferenciais da Comunidade</span>
         <h3 id="highlights-title" className="section-title">
-          Por que mais de centenas de motoristas já entraram?
+          Por que entrar nos grupos?
         </h3>
       </div>
       <ul className="highlights-list">

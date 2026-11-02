@@ -32,7 +32,7 @@ export const brand = {
   headline: "Economize até 70% em Peças, Acessórios e Ferramentas para seu Carro",
   radar: "Radar de Ofertas Ativo • Shopee e Grandes Lojas",
   description:
-    "Grupos VIP para economizar em peças, ferramentas e estética automotiva. Quer economizar em outro item? Envie o link de qualquer produto para nossa IA no Telegram e receba o menor preço!",
+    "Grupos VIP para economizar em peças, ferramentas e estética automotiva. Quer economizar em outro item? Envie o link de qualquer produto para nosso bot no Telegram e receba o menor preço!",
   trustBadges: [
     { icon: "🛡️", text: "100% Gratuito" },
     { icon: "⚡", text: "Alertas em Tempo Real" },
@@ -41,9 +41,9 @@ export const brand = {
   ],
   highlights: [
     {
-      icon: "🤖",
-      title: "IA Caçadora de Bugs de Preço",
-      desc: "Algoritmo rastreia descontos anormais e cupons relâmpago antes que esgotem.",
+      icon: "🔍",
+      title: "Monitoramento de Ofertas e Cupons",
+      desc: "Rastreamos promoções, cupons relâmpago e oportunidades reais na Shopee e grandes lojas.",
     },
     {
       icon: "⚡",
@@ -64,7 +64,7 @@ export const visualCategories: VisualCategory[] = [
     id: "estetica",
     name: "Estética Automotiva",
     icon: "✨",
-    tag: "Até 60% OFF",
+    tag: "Cupons Shopee",
     description: "Ceras, vitrificadores, shampoos neutros, toalhas de microfibra e politrizes.",
     examples: ["Ceras & Selantes", "Microfibras 500GSM", "Politrizes", "Shampoos Automotivos"],
   },
@@ -80,7 +80,7 @@ export const visualCategories: VisualCategory[] = [
     id: "ferramentas",
     name: "Ferramentas & Oficina",
     icon: "🔧",
-    tag: "Bugs de Preço",
+    tag: "Melhores Preços",
     description: "Scanners OBD2, jogos de catraca, calibradores digitais e compressores portáteis 12V.",
     examples: ["Scanner OBD2 Bluetooth", "Maleta de Ferramentas", "Compressores Portáteis"],
   },
@@ -88,7 +88,7 @@ export const visualCategories: VisualCategory[] = [
     id: "manutencao",
     name: "Peças & Manutenção",
     icon: "🏁",
-    tag: "Cupons Shopee",
+    tag: "Descontos Reais",
     description: "Filtros de ar, palhetas de silicone, lâmpadas super brancas, aditivos e fluidos.",
     examples: ["Filtros Esportivos", "Palhetas de Silicone", "Aditivos & Óleos", "Lâmpadas H4/H7"],
   },
@@ -101,7 +101,7 @@ export const botInfo = {
   tagline: "Comparador de Preços com Inteligência Artificial",
   badge: "Novo • Gratuito no Telegram",
   description:
-    "Você manda o link de qualquer produto que quer comprar. Nossa Inteligência Artificial analisa o produto, varre a internet procurando o mesmo item mais barato e te devolve o link com o menor preço direto na conversa!",
+    "Você manda o link de qualquer produto que quer comprar. Nosso bot analisa o produto, varre a internet procurando o mesmo item mais barato e te devolve o link com o menor preço direto na conversa!",
   steps: [
     {
       num: "1",
@@ -112,7 +112,7 @@ export const botInfo = {
     {
       num: "2",
       title: "Envie para o bot no Telegram",
-      desc: "Cole o link na conversa com a IA do @ofertas_toda_hora_bot. Ele analisa em segundos.",
+      desc: "Cole o link na conversa com o @ofertas_toda_hora_bot. Ele analisa em segundos.",
       icon: "💬",
     },
     {
@@ -123,7 +123,7 @@ export const botInfo = {
     },
   ],
   stats: [
-    { label: "Economia", value: "Até 70% OFF" },
+    { label: "Economia", value: "Menor Preço" },
     { label: "Velocidade", value: "Em segundos" },
     { label: "Acesso", value: "100% Gratuito" },
   ],
@@ -132,7 +132,7 @@ export const botInfo = {
 export const groups: Group[] = [
   {
     title: "Entrar no Grupo VIP do WhatsApp",
-    description: "Alertas mais rápidos de peças & acessórios • Vagas abertas.",
+    description: "Grátis, sem spam. Você pode sair quando quiser.",
     categoryId: "automotivo",
     platform: "whatsapp",
     badge: "Mais Recomendado",
@@ -142,13 +142,13 @@ export const groups: Group[] = [
   },
   {
     title: "Chamar o Bot no Telegram",
-    description: "Envie o link de qualquer produto e a IA acha mais barato.",
+    description: "Envie o link de qualquer produto e ele acha mais barato.",
     categoryId: "automotivo",
     platform: "telegram",
-    badge: "IA Comparadora",
+    badge: "Comparador",
     url: "https://t.me/ofertas_toda_hora_bot?start=site",
     status: "ativo",
-    featured: true,
+    featured: false,
   },
   {
     title: "Entrar no Canal do Telegram",
@@ -161,4 +161,3 @@ export const groups: Group[] = [
     featured: false,
   },
 ];
-

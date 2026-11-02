@@ -10,16 +10,16 @@ declare global {
 
 interface GroupButtonProps {
   group: Group;
-  labelPrefix?: string;
+  placement?: string;
 }
 
-export function GroupButton({ group }: GroupButtonProps) {
+export function GroupButton({ group, placement = "main" }: GroupButtonProps) {
   const handleClick = () => {
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
-      window.fbq("track", "Schedule", {
+      window.fbq("track", "Lead", {
         content_name: group.title,
         platform: group.platform,
-        test_event_code: "TEST97697",
+        placement,
       });
     }
 
@@ -27,6 +27,7 @@ export function GroupButton({ group }: GroupButtonProps) {
       track("cta_click", {
         title: group.title,
         platform: group.platform,
+        placement,
         url: group.url,
       });
     } catch {
@@ -34,9 +35,11 @@ export function GroupButton({ group }: GroupButtonProps) {
     }
   };
 
+  const isSecondary = !group.featured;
+
   return (
     <a
-      className={`group-btn group-btn--${group.platform}`}
+      className={`group-btn group-btn--${group.platform}${isSecondary ? " group-btn--secondary" : ""}`}
       href={group.url}
       target="_blank"
       rel="noopener noreferrer"

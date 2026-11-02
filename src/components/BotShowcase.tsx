@@ -4,22 +4,24 @@ import { botInfo } from "../data/config";
 import { PlatformIcon } from "./Icons";
 
 export function BotShowcase() {
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayVideo = () => {
     setIsPlaying(true);
-    if (iframeRef.current && iframeRef.current.contentWindow) {
-      iframeRef.current.contentWindow.postMessage("play", "*");
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // autoplay restriction fallback
+      });
     }
   };
 
   const handleBotClick = () => {
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
-      window.fbq("track", "Schedule", {
+      window.fbq("track", "Lead", {
         content_name: "Bot Ofertas Todo Dia Telegram",
         platform: "telegram",
-        test_event_code: "TEST97697",
+        placement: "bot_showcase",
       });
     }
 
@@ -27,6 +29,7 @@ export function BotShowcase() {
       track("cta_click", {
         title: "Bot Ofertas Todo Dia Telegram",
         platform: "telegram",
+        placement: "bot_showcase",
         url: botInfo.url,
       });
     } catch {
@@ -54,14 +57,50 @@ export function BotShowcase() {
           <div className="bot-video__phone-frame">
             <div className="bot-video__speaker-notch" aria-hidden="true" />
             <div className="bot-video__screen">
-              <iframe
-                ref={iframeRef}
-                src="/video-institucional.html"
-                title="Vídeo demonstrativo do Bot Ofertas Todo Dia no Telegram"
-                className="bot-video__iframe"
-                loading="lazy"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
-              />
+              {!isPlaying ? (
+                <div
+                  className="bot-video__poster-wrapper"
+                  onClick={handlePlayVideo}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") handlePlayVideo();
+                  }}
+                  aria-label="Reproduzir vídeo demonstrativo do bot"
+                >
+                  <img
+                    src="/og.jpg"
+                    alt="Capa do vídeo demonstrativo"
+                    className="bot-video__poster-img"
+                    width={320}
+                    height={568}
+                    loading="lazy"
+                  />
+                  <div className="bot-video__play-overlay">
+                    <span className="bot-video__play-badge" aria-hidden="true">
+                      ▶
+                    </span>
+                    <span className="bot-video__play-caption">Assistir Demonstração</span>
+                  </div>
+                </div>
+              ) : (
+                <video
+                  ref={videoRef}
+                  className="bot-video__player"
+                  poster="/og.jpg"
+                  controls
+                  autoPlay
+                  playsInline
+                >
+                  <source src="/video-institucional.mp4" type="video/mp4" />
+                  <iframe
+                    src="/video-institucional.html"
+                    title="Vídeo demonstrativo do Bot Ofertas Todo Dia no Telegram"
+                    className="bot-video__iframe"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+                  />
+                </video>
+              )}
             </div>
           </div>
 
