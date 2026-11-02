@@ -3,10 +3,9 @@ import { track } from "@vercel/analytics";
 import { Analytics } from "@vercel/analytics/react";
 import { abVariants, brand, getVariant, getUtmParams, redirects } from "./data/config";
 import { Profile } from "./components/Profile";
-import { OfferProof } from "./components/OfferProof";
 import { Categories } from "./components/Categories";
 import { Footer } from "./components/Footer";
-import { PlatformIcon } from "./components/Icons";
+import { CheckIcon, PlatformIcon } from "./components/Icons";
 
 export default function App() {
   const variant = getVariant();
@@ -143,14 +142,18 @@ export default function App() {
         </div>
       </section>
 
-      {/* 2. Prova do que a pessoa vai receber no grupo (só renderiza se houver imagem ou dados reais) */}
-      <OfferProof />
-
-      {/* 3. Categorias em linha de chips curtos */}
+      {/* 2. Categorias em linha de chips curtos */}
       <Categories />
 
       {/* 4. Selos rápidos de confiança */}
-      <p className="trust-line">{brand.trustBadges.map((b) => b.text).join(" · ")}</p>
+      <div className="trust-badges-row" aria-label="Garantias do grupo">
+        {brand.trustBadges.map((b, idx) => (
+          <span key={idx} className="trust-badge">
+            <CheckIcon />
+            <span className="trust-badge__text">{b.text}</span>
+          </span>
+        ))}
+      </div>
 
       {/* 5. Repetição do Botão no fim da página antes do rodapé */}
       <section ref={finalCtaRef} className="final-cta-section" aria-label="Chamada final para o grupo">

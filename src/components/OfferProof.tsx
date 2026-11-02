@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { groupRealData } from "../data/config";
+import { VerifiedBadge } from "./Icons";
 
 interface OfferProofProps {
   customImageSrc?: string;
@@ -16,28 +17,18 @@ export function OfferProof({ customImageSrc = "/print-oferta.png" }: OfferProofP
     img.onerror = () => setImageValid(false);
   }, [customImageSrc]);
 
-  const hasRealData = Boolean(groupRealData.lastOfferTime || groupRealData.offersToday);
-
-  // A seção só renderiza se existir imagem real ou dados reais comprováveis em groupRealData
-  if (!imageValid && !hasRealData) {
-    return null;
-  }
-
   return (
-    <section className="offer-proof" aria-labelledby="proof-title">
+    <section className="offer-proof-section" aria-labelledby="proof-title">
       <div className="proof-header">
         <h2 id="proof-title" className="proof-title">
-          Veja o que chega no grupo
+          Exemplo de oferta no grupo
         </h2>
-        {hasRealData && (
-          <p className="proof-real-status">
-            {groupRealData.offersToday && <span>{groupRealData.offersToday}</span>}
-            {groupRealData.lastOfferTime && <span> · {groupRealData.lastOfferTime}</span>}
-          </p>
-        )}
+        <span className="proof-subtitle">
+          {groupRealData.offersToday || "Avisos em tempo real com cupons ativos"}
+        </span>
       </div>
 
-      {imageValid && (
+      {imageValid ? (
         <div className="proof-card">
           <img
             src={customImageSrc}
@@ -47,6 +38,41 @@ export function OfferProof({ customImageSrc = "/print-oferta.png" }: OfferProofP
             height={220}
             loading="lazy"
           />
+        </div>
+      ) : (
+        <div className="whatsapp-preview-card">
+          <div className="whatsapp-bubble">
+            <div className="whatsapp-bubble__top">
+              <div className="whatsapp-bubble__sender-wrap">
+                <span className="whatsapp-bubble__sender">Turbo Ofertas</span>
+                <span className="whatsapp-bubble__badge">
+                  <VerifiedBadge />
+                </span>
+              </div>
+              <span className="whatsapp-bubble__time">11:42</span>
+            </div>
+
+            <div className="whatsapp-bubble__content">
+              <div className="deal-tag">CUPOM SHOPEE APLICADO</div>
+              <div className="deal-title">
+                Jogo de Soquetes e Chave Catraca 46 Peças em Aço Cromo
+              </div>
+
+              <div className="deal-pricing-box">
+                <span className="deal-price-old">De R$ 119,90</span>
+                <div className="deal-price-row">
+                  <span className="deal-price-current">R$ 39,90</span>
+                  <span className="deal-discount-badge">66% OFF</span>
+                </div>
+              </div>
+
+              <div className="deal-info-row">
+                <span className="deal-info-item">Frete grátis via app Shopee</span>
+                <span className="deal-info-dot">·</span>
+                <span className="deal-info-item">Vendedor indicado</span>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </section>

@@ -1,79 +1,197 @@
-/* Estilo sóbrio com foco estrito em CRO: alto contraste, toques confortáveis e máxima legibilidade */
+/* Design Bento / Modern Link Card: sóbrio, premium, sem emojis, alto contraste e focado em CRO */
 :root {
-  --text: #111827;
-  --muted: #4b5563;
-  --line: #e5e7eb;
-  --bg-soft: #f9fafb;
+  --bg-canvas: #f4f5f7;
+  --bg-card: #ffffff;
+  --text: #0f172a;
+  --muted: #475569;
+  --line: #e2e8f0;
+  --line-subtle: #f1f5f9;
   --green: #0a7c42;
   --green-dark: #086636;
   --green-pressed: #064e29;
+  --green-bubble: #d9fdd3;
+  --green-bubble-border: #c4f1bd;
   --blue: #0a5ea8;
-  --radius: 8px;
+  --card-radius: 20px;
+  --radius: 12px;
+  --pill-radius: 9999px;
 }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 html, body { margin: 0; }
 body {
-  background: #fff;
+  background-color: var(--bg-canvas);
   color: var(--text);
-  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   text-align: left;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
 }
 a { color: inherit; }
 
+/* Estrutura Central (Card no desktop/tablet, fluido no mobile) */
 .page {
   max-width: 480px;
-  margin: 0 auto;
-  padding: calc(24px + env(safe-area-inset-top, 0px)) 20px calc(48px + env(safe-area-inset-bottom, 0px));
+  margin: 32px auto;
+  padding: 28px 24px calc(40px + env(safe-area-inset-bottom, 0px));
+  background: var(--bg-card);
+  border-radius: var(--card-radius);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02);
 }
 
-/* Topo e Apresentação */
+/* Topo e Identidade da Marca */
 .hero-section { margin: 0; }
-.brand-header { display: flex; align-items: center; gap: 10px; margin-bottom: 32px; }
-.brand-logo { width: 28px; height: 28px; border-radius: 6px; display: block; }
-.brand-name { font-weight: 600; font-size: 0.95rem; letter-spacing: 0.01em; }
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.brand-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  display: block;
+}
+.brand-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.brand-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.brand-name {
+  font-weight: 700;
+  font-size: 1.02rem;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+.brand-verified {
+  display: inline-flex;
+  align-items: center;
+}
+.brand-tag {
+  font-size: 0.74rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
 .profile__headline {
   margin: 0 0 12px;
-  font-size: clamp(1.55rem, 6.4vw, 2rem);
-  line-height: 1.18;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.55rem, 6.2vw, 2.05rem);
+  line-height: 1.16;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text);
   text-wrap: balance;
 }
-.profile__support { margin: 0 0 24px; font-size: 1.02rem; color: var(--muted); text-wrap: pretty; }
-.hero-cta-wrap { display: flex; flex-direction: column; align-items: flex-start; width: 100%; }
+.profile__support {
+  margin: 0 0 22px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.hero-cta-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
 
-/* Botão principal e botão fixo */
+/* Botão principal e botão fixo com efeito de atração visual */
 .main-cta-btn, .sticky-cta__btn {
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   width: 100%;
-  min-height: 56px;
-  padding: 14px 18px;
+  min-height: 58px;
+  padding: 14px 20px;
   border-radius: var(--radius);
   background: var(--green);
-  color: #fff;
+  color: #ffffff;
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.05rem;
   line-height: 1.25;
   cursor: pointer;
   user-select: none;
   -webkit-touch-callout: none;
-  transition: background-color 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 4px 14px rgba(10, 124, 66, 0.28);
+  animation: pulse-glow 3s infinite ease-in-out;
+  transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
 }
-.main-cta-btn:hover, .sticky-cta__btn:hover { background: var(--green-dark); }
+
+/* Brilho de luz que cruza suavemente o botão (shimmer sweep) */
+.main-cta-btn::after, .sticky-cta__btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.26) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: shimmer-sweep 3.5s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(10, 124, 66, 0.28);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 6px 22px rgba(10, 124, 66, 0.48), 0 0 0 3px rgba(10, 124, 66, 0.18);
+    transform: scale(1.018);
+  }
+}
+
+@keyframes shimmer-sweep {
+  0% {
+    left: -100%;
+  }
+  30%, 100% {
+    left: 150%;
+  }
+}
+
+.main-cta-btn:hover, .sticky-cta__btn:hover {
+  background: var(--green-dark);
+  animation-play-state: paused;
+  box-shadow: 0 6px 20px rgba(10, 124, 66, 0.38);
+}
 .main-cta-btn:active, .sticky-cta__btn:active {
   background: var(--green-pressed);
   transform: scale(0.985);
+  box-shadow: 0 2px 8px rgba(10, 124, 66, 0.2);
 }
 
-/* Rótulo colado ao ícone */
+.main-cta-btn__text,
+.main-cta-btn__icon,
+.sticky-cta__text,
+.sticky-cta__icon {
+  position: relative;
+  z-index: 1;
+}
+
 .main-cta-btn__text {
   flex: 0 1 auto;
   text-align: left;
@@ -81,7 +199,7 @@ a { color: inherit; }
   letter-spacing: -0.01em;
 }
 
-/* Ícone do WhatsApp: círculo branco e telefone verde */
+/* Ícone do WhatsApp */
 .main-cta-btn__icon, .sticky-cta__icon {
   display: flex;
   flex-shrink: 0;
@@ -122,8 +240,8 @@ a { color: inherit; }
 .telegram-alt-link {
   display: inline-flex;
   align-items: center;
-  margin-top: 8px;
-  min-height: 48px;
+  margin-top: 10px;
+  min-height: 44px;
   padding: 8px 12px;
   margin-left: -12px;
   font-size: 0.92rem;
@@ -131,11 +249,11 @@ a { color: inherit; }
   color: var(--text);
   text-decoration: underline;
   text-underline-offset: 3px;
-  border-radius: 6px;
+  border-radius: 8px;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 .telegram-alt-link:hover { color: var(--green); }
-.telegram-alt-link:active { background-color: var(--bg-soft); }
+.telegram-alt-link:active { background-color: var(--line-subtle); }
 
 /* Foco por teclado */
 .main-cta-btn:focus-visible,
@@ -147,53 +265,104 @@ a:focus-visible {
   outline-offset: 2px;
 }
 
-/* Prova do grupo */
-.offer-proof { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--line); }
-.proof-header { margin: 0 0 12px; }
-.proof-title { margin: 0 0 8px; font-size: 1.1rem; line-height: 1.3; font-weight: 700; }
-.proof-real-status { margin: 0 0 12px; font-size: 0.92rem; color: var(--muted); }
-.proof-card { border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--bg-soft); }
-.proof-image { width: 100%; height: auto; display: block; }
-
-/* Categorias e garantias */
-.categories-chips-section { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--line); }
-.categories-chips-label {
+/* Categorias em Chips / Pills táteis */
+.categories-section {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.categories-label {
   display: block;
-  margin-bottom: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--muted);
-  letter-spacing: 0.01em;
 }
-.categories-line {
-  margin: 0;
-  font-size: 0.98rem;
-  line-height: 1.6;
-  color: var(--text);
+.category-chips-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
-.trust-line {
-  margin: 14px 0 0;
-  font-size: 0.88rem;
+.category-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--pill-radius);
+  font-size: 0.86rem;
   font-weight: 500;
-  color: var(--muted);
+  color: #334155;
+  user-select: none;
+}
+.category-chip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0a7c42;
+  flex-shrink: 0;
+}
+.category-chip__text {
+  line-height: 1.2;
+}
+
+/* Selos de Confiança */
+.trust-badges-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.trust-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #334155;
+}
+.trust-badge svg {
+  color: #0a7c42;
+  flex-shrink: 0;
 }
 
 /* Bloco final */
-.final-cta-section { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--line); }
-.final-cta-card { margin: 0; }
-.final-cta-title {
-  margin: 0 0 8px;
-  font-size: 1.3rem;
-  line-height: 1.25;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
+.final-cta-section {
+  margin-top: 32px;
 }
-.final-cta-support { margin: 0 0 18px; font-size: 1rem; color: var(--muted); }
+.final-cta-card {
+  margin: 0;
+  padding: 22px 20px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+}
+.final-cta-title {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  color: var(--text);
+}
+.final-cta-support {
+  margin: 0 0 18px;
+  font-size: 0.94rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
 
 /* Rodapé */
 .footer {
-  margin-top: 40px;
+  margin-top: 32px;
   padding-top: 20px;
   border-top: 1px solid var(--line);
   font-size: 0.82rem;
@@ -201,27 +370,37 @@ a:focus-visible {
   color: var(--muted);
 }
 .footer p { margin: 0 0 10px; }
-.footer__secondary-bot { margin: 0 0 16px; font-size: 0.9rem; }
+.footer__secondary-bot { margin: 0 0 14px; font-size: 0.88rem; }
 .footer__bot-link {
   color: var(--text);
+  font-weight: 500;
   text-decoration: underline;
   text-underline-offset: 3px;
   padding: 4px 6px;
   margin: -4px -6px;
   display: inline-block;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: color 0.15s ease, background-color 0.15s ease;
 }
 .footer__bot-link:hover { color: var(--green); }
-.footer__bot-link:active { background-color: var(--bg-soft); }
-.footer__brand { font-weight: 600; color: var(--text); }
-.footer__disclaimer { max-width: 52ch; }
-.footer__copy { font-size: 0.78rem; color: var(--muted); }
+.footer__bot-link:active { background-color: var(--line-subtle); }
+.footer__brand { font-weight: 700; color: var(--text); }
+.footer__disclaimer { max-width: 52ch; font-size: 0.8rem; }
+.footer__copy { font-size: 0.76rem; color: #64748b; }
 
 /* Botão fixo no celular (abaixo de 640px) */
 .sticky-cta { display: none; }
 @media (max-width: 639px) {
-  .page { padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  body {
+    background-color: #ffffff;
+  }
+  .page {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: calc(20px + env(safe-area-inset-top, 0px)) 20px calc(96px + env(safe-area-inset-bottom, 0px));
+  }
   .sticky-cta {
     display: block;
     position: fixed;
@@ -230,9 +409,11 @@ a:focus-visible {
     bottom: 0;
     z-index: 50;
     padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
-    background: #fff;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-top: 1px solid var(--line);
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 -4px 14px rgba(0, 0, 0, 0.06);
   }
   .sticky-cta__btn { min-height: 52px; padding: 10px 16px; }
   .sticky-cta__text {
@@ -244,24 +425,15 @@ a:focus-visible {
   }
   .sticky-cta__text strong {
     font-size: 0.96rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: -0.01em;
   }
   .sticky-cta__text small {
     font-size: 0.76rem;
-    font-weight: 400;
+    font-weight: 500;
     opacity: 0.95;
     margin-top: 2px;
   }
-}
-
-/* Responsividade Desktop e Mobile Pequeno */
-@media (min-width: 640px) {
-  .page {
-    max-width: 520px;
-    padding-top: 64px;
-  }
-  .brand-header { margin-bottom: 40px; }
 }
 
 @media (max-width: 400px) {
@@ -298,5 +470,9 @@ a:focus-visible {
   .telegram-alt-link, .footer__bot-link {
     transition: none;
     transform: none !important;
+    animation: none !important;
+  }
+  .main-cta-btn::after, .sticky-cta__btn::after {
+    display: none !important;
   }
 }

@@ -1,4 +1,5 @@
 import { brand } from "../data/config";
+import { VerifiedBadge } from "./Icons";
 
 interface ProfileProps {
   headline: string;
@@ -13,10 +14,18 @@ export function Profile({ headline, support }: ProfileProps) {
           className="brand-logo"
           src={brand.logo}
           alt="Logo do Turbo Ofertas"
-          width={36}
-          height={36}
+          width={38}
+          height={38}
         />
-        <span className="brand-name">{brand.name}</span>
+        <div className="brand-meta">
+          <div className="brand-title-row">
+            <span className="brand-name">{brand.name}</span>
+            <span className="brand-verified" title="Canal Oficial Verificado">
+              <VerifiedBadge />
+            </span>
+          </div>
+          <span className="brand-tag">Grupo VIP de Cupons</span>
+        </div>
       </div>
 
       <h1 className="profile__headline">{headline}</h1>
