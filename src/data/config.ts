@@ -70,7 +70,7 @@ export interface TrustBadge {
 
 export const brand = {
   name: "Turbo Ofertas",
-  logo: "/logo.svg",
+  logo: "/logo.jpg",
   reassurance: "Grátis. Sem spam. Saia quando quiser.",
   telegramText: "Prefere o Telegram? Entre no canal oficial",
   trustBadges: [
