@@ -1,35 +1,43 @@
 import { brand } from "../data/config";
 import { VerifiedBadge } from "./Icons";
 
-interface ProfileProps {
-  headline: string;
-  support: string;
+export interface ProfileProps {
+  title?: string;
+  bio?: string;
+  headline?: string;
+  support?: string;
 }
 
-export function Profile({ headline, support }: ProfileProps) {
+export function Profile({
+  title = "TURBO OFERTAS",
+  bio = "Peças, ferramentas e estética automotiva com cupons diários no seu celular.",
+}: ProfileProps = {}) {
   return (
-    <header className="profile">
-      <div className="brand-header">
-        <img
-          className="brand-logo"
-          src={brand.logo}
-          alt="Logo do Turbo Ofertas"
-          width={38}
-          height={38}
-        />
-        <div className="brand-meta">
-          <div className="brand-title-row">
-            <span className="brand-name">{brand.name}</span>
-            <span className="brand-verified" title="Canal Oficial Verificado">
-              <VerifiedBadge />
-            </span>
-          </div>
-          <span className="brand-tag">Grupo VIP de Cupons</span>
+    <header className="profile-header profile" aria-label="Perfil Turbo Ofertas">
+      <div className="profile-avatar-container">
+        <div className="profile-avatar-ring">
+          <img
+            className="profile-avatar"
+            src={brand.logo}
+            alt={`Logo ${brand.name}`}
+            width={72}
+            height={72}
+          />
         </div>
       </div>
 
-      <h1 className="profile__headline">{headline}</h1>
-      <p className="profile__support">{support}</p>
+      <div className="profile-title-row">
+        <h1 className="profile-title">{title}</h1>
+        <span
+          className="profile-verified"
+          title="Canal Oficial Verificado"
+          aria-label="Canal Oficial Verificado"
+        >
+          <VerifiedBadge />
+        </span>
+      </div>
+
+      <p className="profile-bio">{bio}</p>
     </header>
   );
 }
