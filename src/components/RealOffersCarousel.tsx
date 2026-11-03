@@ -1,8 +1,8 @@
-import { realOffersList, type RealOffer } from "../data/config";
+import { realOffersList, redirects, type RealOffer } from "../data/config";
 import { StarIcon } from "./Icons";
 
 interface RealOffersCarouselProps {
-  onCtaClick?: () => void;
+  onCtaClick?: (offer?: RealOffer) => void;
   offers?: RealOffer[];
 }
 
@@ -51,19 +51,14 @@ export function RealOffersCarousel({
         tabIndex={0}
       >
         {offers.map((offer) => (
-          <article
+          <a
             key={offer.id}
+            href={redirects.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
             className="offer-card"
-            role="button"
-            tabIndex={0}
             aria-label={`${offer.title} - ${offer.discount} por ${offer.currentPrice}`}
-            onClick={onCtaClick}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                onCtaClick?.();
-              }
-            }}
+            onClick={() => onCtaClick?.(offer)}
           >
             {/* Imagem do produto com tags */}
             <div className="offer-card__media">
@@ -118,7 +113,7 @@ export function RealOffersCarousel({
                 </div>
               </div>
             </div>
-          </article>
+          </a>
         ))}
       </div>
     </section>

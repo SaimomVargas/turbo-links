@@ -134,9 +134,6 @@ export default function App() {
 
   const handleCarouselClick = () => {
     handleCtaClick("carousel");
-    if (typeof window !== "undefined") {
-      window.open(redirects.whatsapp, "_blank", "noopener,noreferrer");
-    }
   };
 
   return (
