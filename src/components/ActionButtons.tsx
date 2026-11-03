@@ -1,3 +1,4 @@
+import type React from "react";
 import { redirects } from "../data/config";
 import { PlatformIcon, TelegramIcon, BotIcon } from "./Icons";
 
@@ -9,6 +10,9 @@ export interface ActionButtonsProps {
   whatsAppUrl?: string;
   telegramUrl?: string;
   botUrl?: string;
+  heroBtnRef?: React.Ref<HTMLAnchorElement>;
+  title?: string;
+  subtext?: string;
 }
 
 export function ActionButtons({
@@ -19,6 +23,9 @@ export function ActionButtons({
   whatsAppUrl = redirects.whatsapp,
   telegramUrl = redirects.telegram,
   botUrl = redirects.bot,
+  heroBtnRef,
+  title = "Entrar no Grupo VIP no WhatsApp",
+  subtext = "100% Grátis · Saia quando quiser",
 }: ActionButtonsProps = {}) {
   const handleWhatsApp = () => {
     onWhatsAppClick?.();
@@ -29,6 +36,7 @@ export function ActionButtons({
     <section className="action-buttons-section" aria-label="Ações e canais Turbo Ofertas">
       {/* Botão Principal de Conversão WhatsApp */}
       <a
+        ref={heroBtnRef}
         href={whatsAppUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -40,8 +48,8 @@ export function ActionButtons({
           <PlatformIcon platform="whatsapp" />
         </span>
         <span className="main-cta-btn__text">
-          <strong className="main-cta-btn__title">Entrar no Grupo VIP no WhatsApp</strong>
-          <small className="main-cta-btn__subtext">100% Grátis · Saia quando quiser</small>
+          <strong className="main-cta-btn__title">{title}</strong>
+          <small className="main-cta-btn__subtext">{subtext}</small>
         </span>
       </a>
 

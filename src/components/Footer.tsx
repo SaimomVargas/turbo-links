@@ -3,12 +3,15 @@ import { track } from "@vercel/analytics";
 
 interface FooterProps {
   variant?: string;
+  onBotClick?: () => void;
 }
 
-export function Footer({ variant: propVariant }: FooterProps) {
+export function Footer({ variant: propVariant, onBotClick }: FooterProps) {
   const variant = propVariant || getVariant();
 
   const handleBotClick = () => {
+    onBotClick?.();
+
     const utms = getUtmParams();
     if (typeof window !== "undefined" && typeof window.fbq === "function") {
       window.fbq("track", "Lead", {
@@ -56,7 +59,7 @@ export function Footer({ variant: propVariant }: FooterProps) {
       </p>
 
       <p className="footer__disclaimer">
-        <strong>Transparência:</strong> o acesso ao grupo no WhatsApp é 100% gratuito. Participamos de programas de afiliados e podemos receber comissões por compras realizadas através dos links indicados, sem custo adicional para você.
+        <strong>Transparência:</strong> o acesso ao grupo no WhatsApp é 100% gratuito. Participamos dos programas de afiliados da Amazon e Shopee e podemos receber comissões por compras realizadas através dos links indicados, sem custo adicional para você.
       </p>
 
       <p className="footer__copy">

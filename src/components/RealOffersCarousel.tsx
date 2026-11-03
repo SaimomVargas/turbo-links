@@ -54,8 +54,16 @@ export function RealOffersCarousel({
           <article
             key={offer.id}
             className="offer-card"
+            role="button"
+            tabIndex={0}
             aria-label={`${offer.title} - ${offer.discount} por ${offer.currentPrice}`}
             onClick={onCtaClick}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onCtaClick?.();
+              }
+            }}
           >
             {/* Imagem do produto com tags */}
             <div className="offer-card__media">
