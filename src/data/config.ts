@@ -99,3 +99,63 @@ export const categoryChips: CategoryChip[] = [
   { id: "ferramentas", name: "Ferramentas e oficina" },
   { id: "manutencao", name: "Peças e manutenção" },
 ];
+
+export interface RealOffer {
+  id: string;
+  badge: string;
+  title: string;
+  oldPrice: string;
+  currentPrice: string;
+  discount: string;
+  store: "Amazon" | "Shopee";
+  image: string;
+  rating?: string;
+}
+
+export const realOffersList: RealOffer[] = [
+  {
+    id: "vonixx-kit",
+    badge: "PRATICIDADE NO VOLANTE",
+    title: "Kit Completo para Estética Automotiva Vonixx V-FLOC SINTRA FAST INTENSE TOK FINAL PNEU PRETINHO e ACESSÓRIOS",
+    oldPrice: "R$ 199,92",
+    currentPrice: "R$ 159,52",
+    discount: "-20%",
+    store: "Amazon",
+    image: "/offers/offer-vonixx.jpg",
+    rating: "4,5 ★ Escolha da Amazon",
+  },
+  {
+    id: "philips-h4",
+    badge: "CUIDADO ESPECIAL PRO CARRO",
+    title: "Lâmpada Farol H4 12V 60/55W Philips 12342C1 Standard",
+    oldPrice: "R$ 26,79",
+    currentPrice: "R$ 19,49",
+    discount: "-27%",
+    store: "Amazon",
+    image: "/offers/offer-philips.jpg",
+    rating: "4,6 ★",
+  },
+  {
+    id: "petrol-max",
+    badge: "OPORTUNIDADE DO DIA",
+    title: "Aditivo Concentrado Alta Performance Petrol Max Motorflu 200 mL",
+    oldPrice: "R$ 20,53",
+    currentPrice: "R$ 14,93",
+    discount: "-27%",
+    store: "Amazon",
+    image: "/offers/offer-petrol.jpg",
+    rating: "5,0 ★ Mais vendido",
+  },
+  {
+    id: "magilclean-shampoo",
+    badge: "CUIDADO ESPECIAL PRO CARRO",
+    title: "Shampoo Automotivo Autoclean Ultra Limpador Magilclean 1,5L",
+    oldPrice: "R$ 58,90",
+    currentPrice: "R$ 41,70",
+    discount: "-29%",
+    store: "Amazon",
+    image: "/offers/offer-magilclean.jpg",
+    rating: "4,0 ★",
+  },
+];
+
