@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { track } from "@vercel/analytics";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/react";
 import { abVariants, brand, getVariant, getUtmParams, redirects } from "./data/config";
 import { Profile } from "./components/Profile";
 import { ActionButtons } from "./components/ActionButtons";
@@ -235,7 +234,6 @@ export default function App() {
       </div>
 
       <Analytics />
-      <SpeedInsights />
     </div>
   );
 }
